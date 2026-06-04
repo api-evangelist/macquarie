@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/macquarie/main/json-structure/macquarie-author-structure.json",
+  "name": "MacquarieFigshareAuthor",
+  "description": "JSON Structure for an author/creator of a Macquarie RDR research output (Figshare API v2 Author object).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int64",
+      "description": "Author id"
+    },
+    "full_name": {
+      "type": "string",
+      "description": "Author full name"
+    },
+    "first_name": {
+      "type": "string",
+      "description": "Author first name"
+    },
+    "last_name": {
+      "type": "string",
+      "description": "Author last name"
+    },
+    "is_active": {
+      "type": "boolean",
+      "description": "True if author has published items"
+    },
+    "url_name": {
+      "type": "string",
+      "description": "Author url name"
+    },
+    "orcid_id": {
+      "type": "string",
+      "description": "Author Orcid"
+    }
+  },
+  "required": [
+    "first_name",
+    "full_name",
+    "id",
+    "is_active",
+    "last_name",
+    "orcid_id",
+    "url_name"
+  ]
+}

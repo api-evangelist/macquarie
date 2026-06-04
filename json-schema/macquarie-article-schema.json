@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/macquarie/main/json-schema/macquarie-article-schema.json",
+  "title": "Figshare Article",
+  "description": "A public research output (article/dataset/thesis) in the Macquarie University Research Data Repository as returned by the Figshare API v2. Derived faithfully from the upstream Figshare OpenAPI 3.0.3 'Article' schema.",
+  "type": "object",
+  "required": [
+    "created_date",
+    "defined_type",
+    "defined_type_name",
+    "doi",
+    "handle",
+    "id",
+    "resource_doi",
+    "resource_title",
+    "thumb",
+    "timeline",
+    "title",
+    "url",
+    "url_private_api",
+    "url_private_html",
+    "url_public_api",
+    "url_public_html"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier for article"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of article"
+    },
+    "doi": {
+      "type": "string",
+      "description": "DOI"
+    },
+    "handle": {
+      "type": "string",
+      "description": "Handle"
+    },
+    "url": {
+      "type": "string",
+      "description": "Api endpoint for article",
+      "format": "url"
+    },
+    "url_public_html": {
+      "type": "string",
+      "description": "Public site endpoint for article",
+      "format": "url"
+    },
+    "url_public_api": {
+      "type": "string",
+      "description": "Public Api endpoint for article",
+      "format": "url"
+    },
+    "url_private_html": {
+      "type": "string",
+      "description": "Private site endpoint for article",
+      "format": "url"
+    },
+    "url_private_api": {
+      "type": "string",
+      "description": "Private Api endpoint for article",
+      "format": "url"
+    },
+    "timeline": {
+      "type": "object",
+      "description": "Timeline of publication dates",
+      "properties": {
+        "firstOnline": {
+          "type": "string",
+          "description": "Online posted date"
+        },
+        "publisherPublication": {
+          "type": "string",
+          "description": "Publish date"
+        },
+        "publisherAcceptance": {
+          "type": "string",
+          "description": "Date when the item was accepted for publication"
+        }
+      }
+    },
+    "thumb": {
+      "type": "string",
+      "description": "Thumbnail image",
+      "format": "url"
+    },
+    "defined_type": {
+      "type": "integer",
+      "description": "Type of article identifier"
+    },
+    "defined_type_name": {
+      "type": "string",
+      "description": "Name of the article type identifier"
+    },
+    "resource_doi": {
+      "type": "string",
+      "description": "Deprecated by related materials. Not applicable to regular users. In a publisher case, this is the publisher article DOI.",
+      "default": ""
+    },
+    "resource_title": {
+      "type": "string",
+      "description": "Deprecated by related materials. Not applicable to regular users. In a publisher case, this is the publisher article title.",
+      "default": ""
+    },
+    "created_date": {
+      "type": "string",
+      "description": "Date when article was created"
+    }
+  }
+}

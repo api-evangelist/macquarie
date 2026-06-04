@@ -1,0 +1,66 @@
+---
+# Spectral ruleset for the Macquarie University Research Data Repository
+# (Figshare API v2). Encodes patterns observed in the upstream Figshare
+# OpenAPI 3.0.3 description as saved in openapi/macquarie-rdr-figshare.yaml.
+formats:
+  - oas3
+extends:
+  - spectral:oas
+rules:
+  macquarie-info-title:
+    description: API info.title must reference Figshare / Macquarie RDR.
+    severity: warn
+    given: $.info.title
+    then:
+      function: pattern
+      functionOptions:
+        match: "(?i)figshare"
+
+  macquarie-server-https:
+    description: All servers must use the public Figshare HTTPS base URL.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://api\\.figshare\\.com/v2"
+
+  macquarie-oauth2-security-scheme:
+    description: Authenticated operations rely on the OAuth2 security scheme.
+    severity: warn
+    given: $.components.securitySchemes
+    then:
+      field: OAuth2
+      function: truthy
+
+  macquarie-article-doi-required:
+    description: The Article object must declare a DOI field (Macquarie uses DOI prefix 10.25949).
+    severity: warn
+    given: $.components.schemas.Article.required
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            const: doi
+
+  macquarie-operation-tags:
+    description: Every operation should be tagged for discoverability.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: tags
+      function: truthy
+
+  macquarie-operation-description:
+    description: Operations should carry a human-readable description or summary.
+    severity: info
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: [description]
+            - required: [summary]

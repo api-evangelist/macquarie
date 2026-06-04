@@ -41,6 +41,26 @@ apis:
     baseURL: https://api.figshare.com/v2
     tags: [ Research Data, Repository, Figshare, Open Data, DOI ]
     properties:
+      - type: OpenAPI
+        url: openapi/macquarie-rdr-figshare.yaml
+      - type: JSONSchema
+        url: json-schema/macquarie-article-schema.json
+      - type: JSONSchema
+        url: json-schema/macquarie-author-schema.json
+      - type: JSONStructure
+        url: json-structure/macquarie-article-structure.json
+      - type: JSONStructure
+        url: json-structure/macquarie-author-structure.json
+      - type: Example
+        url: examples/macquarie-list-articles-example.json
+      - type: Example
+        url: examples/macquarie-author-example.json
+      - type: Rules
+        url: rules/macquarie-rules.yml
+      - type: Vocabulary
+        url: vocabulary/macquarie-vocabulary.yml
+      - type: JSONLD
+        url: json-ld/macquarie-context.jsonld
       - type: Documentation
         url: https://docs.figshare.com/
       - type: Documentation

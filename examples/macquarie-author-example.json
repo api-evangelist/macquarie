@@ -1,0 +1,16 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.figshare.com/v2/articles/{article_id}",
+    "description": "Authors are returned as part of a complete article record."
+  },
+  "response": {
+    "id": 97657,
+    "full_name": "John Doe",
+    "first_name": "John",
+    "last_name": "Doe",
+    "is_active": false,
+    "url_name": "John_Doe",
+    "orcid_id": "1234-5678-9123-1234"
+  }
+}

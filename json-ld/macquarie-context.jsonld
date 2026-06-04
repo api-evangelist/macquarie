@@ -1,0 +1,54 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "datacite": "http://purl.org/spar/datacite/",
+    "mq": "https://figshare.mq.edu.au/vocab#",
+    "@vocab": "https://figshare.mq.edu.au/vocab#",
+
+    "Organization": "schema:CollegeOrUniversity",
+    "name": "schema:name",
+    "url": "schema:url",
+
+    "Article": "schema:Dataset",
+    "Collection": "schema:Collection",
+    "Project": "schema:Project",
+    "Author": "schema:Person",
+
+    "id": "schema:identifier",
+    "title": "schema:name",
+    "description": "schema:description",
+    "doi": {
+      "@id": "datacite:doi",
+      "@type": "@id"
+    },
+    "handle": "datacite:Handle",
+    "thumb": {
+      "@id": "schema:thumbnailUrl",
+      "@type": "@id"
+    },
+    "published_date": {
+      "@id": "schema:datePublished",
+      "@type": "schema:Date"
+    },
+    "timeline": "dcterms:date",
+    "authors": "schema:author",
+    "full_name": "schema:name",
+    "orcid_id": {
+      "@id": "schema:identifier",
+      "@type": "@id"
+    },
+    "categories": "schema:about",
+    "tags": "schema:keywords",
+    "files": "schema:associatedMedia",
+    "group": "schema:isPartOf"
+  },
+  "@type": "CollegeOrUniversity",
+  "name": "Macquarie University",
+  "url": "https://www.mq.edu.au/",
+  "mq:researchDataRepository": "https://figshare.mq.edu.au/",
+  "mq:figshareGroupId": 39392,
+  "mq:doiPrefix": "10.25949",
+  "mq:apiBaseURL": "https://api.figshare.com/v2"
+}

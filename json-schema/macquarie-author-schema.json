@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/macquarie/main/json-schema/macquarie-author-schema.json",
+  "title": "Figshare Author",
+  "description": "An author/creator associated with a Macquarie RDR research output (Figshare API v2 'Author' schema).",
+  "type": "object",
+  "required": [
+    "first_name",
+    "full_name",
+    "id",
+    "is_active",
+    "last_name",
+    "orcid_id",
+    "url_name"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Author id"
+    },
+    "full_name": {
+      "type": "string",
+      "description": "Author full name"
+    },
+    "first_name": {
+      "type": "string",
+      "description": "Author first name"
+    },
+    "last_name": {
+      "type": "string",
+      "description": "Author last name"
+    },
+    "is_active": {
+      "type": "boolean",
+      "description": "True if author has published items"
+    },
+    "url_name": {
+      "type": "string",
+      "description": "Author url name"
+    },
+    "orcid_id": {
+      "type": "string",
+      "description": "Author Orcid"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+---
+vocabulary:
+  name: Macquarie University Research Data Repository Vocabulary
+  description: >-
+    Controlled vocabulary of the core terms used by the Macquarie University
+    Research Data Repository (RDR), which is built on Figshare for Institutions
+    and exposed through the public Figshare REST API v2. Terms are drawn faithfully
+    from the upstream Figshare OpenAPI 3.0.3 description and Macquarie's institutional
+    context (DOI prefix 10.25949, Figshare group id 39392).
+  version: "1.0.0"
+  terms:
+    - term: Article
+      definition: >-
+        A single published research output in the repository - a dataset, thesis,
+        figure, media file or other artefact - identified by a numeric id and a DOI.
+      tags: [ core, research-output, figshare ]
+    - term: Collection
+      definition: >-
+        A curated grouping of articles published together under a single DOI.
+      tags: [ core, grouping, figshare ]
+    - term: Project
+      definition: >-
+        A workspace that organises articles and collaborators prior to or alongside publication.
+      tags: [ core, workspace, figshare ]
+    - term: Author
+      definition: >-
+        A creator credited on a research output, optionally linked to an ORCID identifier.
+      tags: [ people, attribution ]
+    - term: DOI
+      definition: >-
+        Digital Object Identifier minted for an article or collection; Macquarie RDR
+        outputs use the institutional DOI prefix 10.25949.
+      tags: [ identifier, persistent-identifier ]
+    - term: Handle
+      definition: >-
+        Handle System persistent identifier assigned to a research output.
+      tags: [ identifier, persistent-identifier ]
+    - term: Group
+      definition: >-
+        An institutional grouping in Figshare for Institutions; Macquarie University
+        content is scoped to Figshare group id 39392.
+      tags: [ institution, scope ]
+    - term: Category
+      definition: >-
+        A subject classification term from a standard taxonomy applied to a research output.
+      tags: [ classification, taxonomy ]
+    - term: Timeline
+      definition: >-
+        The set of lifecycle dates for a research output (posted, first online, revision).
+      tags: [ metadata, dates ]
+    - term: PublicFile
+      definition: >-
+        A downloadable file attached to a public article, with size, name and download URL.
+      tags: [ files, download ]
+    - term: OAI-PMH
+      definition: >-
+        Open Archives Initiative Protocol for Metadata Harvesting endpoint exposing
+        repository metadata for standards-based harvesting by external aggregators.
+      tags: [ metadata, harvesting, interoperability ]
