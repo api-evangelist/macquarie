@@ -1,0 +1,97 @@
+---
+aid: macquarie
+name: Macquarie University
+description: >-
+  Macquarie University is a public research university in Sydney, Australia,
+  ranked #133 in the QS World University Rankings 2025. Its public,
+  developer-relevant API footprint is concentrated in research-data and library
+  infrastructure rather than a single branded developer portal. The Macquarie
+  University Research Data Repository (RDR) runs on Figshare for Institutions,
+  which exposes content through the public Figshare REST API v2 and an OAI-PMH
+  metadata endpoint; the university Library maintains public open-source tooling
+  on GitHub built around Ex Libris Alma. Authentication for institutional
+  systems is provided via a Shibboleth/SAML identity provider. No dedicated,
+  publicly documented Macquarie University developer portal or open-data API
+  platform was found during this review.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/macquarie/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Research Data
+  - Library
+  - Australia
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: macquarie:rdr-figshare
+    name: Macquarie University Research Data Repository (Figshare API)
+    description: >-
+      The Macquarie University Research Data Repository (RDR) is built on
+      Figshare for Institutions and surfaces its public datasets, theses, and
+      other research outputs through the public Figshare REST API v2. Macquarie
+      content is discoverable via the API (DOI prefix 10.25949, Figshare group
+      id 39392) and the public figshare.mq.edu.au discovery portal.
+    humanURL: https://figshare.mq.edu.au/
+    baseURL: https://api.figshare.com/v2
+    tags: [ Research Data, Repository, Figshare, Open Data, DOI ]
+    properties:
+      - type: Documentation
+        url: https://docs.figshare.com/
+      - type: Documentation
+        url: https://libguides.mq.edu.au/research_data_repository
+  - aid: macquarie:rdr-oai-pmh
+    name: Macquarie University Research Data Repository (OAI-PMH)
+    description: >-
+      The Figshare-backed Research Data Repository exposes metadata for harvest
+      via the OAI-PMH protocol through the Figshare OAI-PMH endpoint, supporting
+      standards-based metadata harvesting of Macquarie research outputs by
+      external aggregators.
+    humanURL: https://docs.figshare.com/
+    baseURL: https://api.figshare.com/v2/oai
+    tags: [ OAI-PMH, Metadata, Harvesting, Repository, Research Data ]
+    properties:
+      - type: Documentation
+        url: https://docs.figshare.com/
+  - aid: macquarie:library-alma-tools
+    name: Macquarie University Library Open-Source Tooling
+    description: >-
+      The Macquarie University Library publishes public open-source utilities on
+      GitHub that integrate with the Ex Libris Alma library services platform
+      (for example an Alma toolkit and resource-sharing partner harvest/sync
+      tools). These consume the Alma APIs rather than exposing a public Macquarie
+      API of their own.
+    humanURL: https://github.com/mqlibrary
+    tags: [ Library, Alma, Ex Libris, Open Source ]
+    properties:
+      - type: GitHub
+        url: https://github.com/mqlibrary
+      - type: Documentation
+        url: https://developers.exlibrisgroup.com/alma/
+common:
+  - type: Website
+    url: https://www.mq.edu.au/
+  - type: GitHub
+    url: https://github.com/macquarie-university
+  - type: GitHub
+    url: https://github.com/mqlibrary
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/macquarie-university/
+  - type: Authentication
+    url: https://idp.mq.edu.au/idp/shibboleth
+  - type: Plans
+    url: plans/macquarie-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/macquarie-rate-limits.yml
+  - type: FinOps
+    url: finops/macquarie-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

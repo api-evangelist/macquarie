@@ -1,0 +1,61 @@
+---
+name: Macquarie University
+description: Macquarie University public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/macquarie/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 2
+    summary: >-
+      Macquarie University (QS World 2025 #133) has no dedicated, publicly
+      documented developer portal or open-data API platform. The strongest
+      verified, live API surface is the Research Data Repository, which runs on
+      Figshare for Institutions: the public Figshare REST API v2 returns
+      Macquarie content (DOI prefix 10.25949, group id 39392) and the Figshare
+      OAI-PMH endpoint responds to verb=Identify. The Library maintains real
+      public open-source Alma tooling on GitHub. A Shibboleth/SAML IdP backs
+      institutional SSO. The official macquarie-university GitHub org exists but
+      has zero public repos. No Macquarie-branded endpoints were fabricated;
+      Macquarie Bank (a separate financial institution with its own developer
+      portal) was deliberately excluded.
+    endpoints:
+      - url: https://www.mq.edu.au/
+        status: 403
+        note: Official website; returns 403 to bare curl (bot filtering) but resolves in browser.
+      - url: https://figshare.mq.edu.au/
+        status: 202
+        note: Research Data Repository public discovery portal (Figshare for Institutions).
+      - url: https://api.figshare.com/v2/articles/search
+        status: 200
+        note: Public Figshare API v2; POST search returns Macquarie RDR articles (DOI 10.25949).
+      - url: https://api.figshare.com/v2/oai?verb=Identify
+        status: 200
+        note: Figshare OAI-PMH metadata harvesting endpoint, live.
+      - url: https://www.researchonline.mq.edu.au/
+        status: 202
+        note: ResearchOnline / RDR alias resolving to the Figshare-backed repository.
+      - url: https://libguides.mq.edu.au/research_data_repository
+        status: 200
+        note: Library guide documenting the Research Data Repository.
+      - url: https://github.com/macquarie-university
+        status: 200
+        note: Official Macquarie University GitHub org; exists but no public repositories.
+      - url: https://github.com/mqlibrary
+        status: 200
+        note: Macquarie University Library GitHub org with public Alma-related open-source tools.
+      - url: https://idp.mq.edu.au/idp/shibboleth
+        status: 200
+        note: Shibboleth/SAML identity provider for institutional SSO.
+      - url: https://coursehandbook.mq.edu.au/
+        status: 200
+        note: Course Handbook web app; no public API documentation found.
+      - url: https://developer.mq.edu.au/
+        status: 0
+        note: No dedicated developer portal; host does not resolve.
+      - url: https://data.mq.edu.au/
+        status: 0
+        note: No open-data platform; host does not resolve.
+      - url: https://status.mq.edu.au/
+        status: 0
+        note: No public status page at this host.
