@@ -51,9 +51,9 @@ apis:
         url: json-structure/macquarie-article-structure.json
       - type: JSONStructure
         url: json-structure/macquarie-author-structure.json
-      - type: Example
+      - type: Examples
         url: examples/macquarie-list-articles-example.json
-      - type: Example
+      - type: Examples
         url: examples/macquarie-author-example.json
       - type: Rules
         url: rules/macquarie-rules.yml
