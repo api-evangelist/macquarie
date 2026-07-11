@@ -94,6 +94,8 @@ apis:
       - type: Documentation
         url: https://developers.exlibrisgroup.com/alma/
 common:
+  - type: OAuthScopes
+    url: scopes/macquarie-scopes.yml
   - type: Website
     url: https://www.mq.edu.au/
   - type: GitHub
