@@ -94,6 +94,10 @@ apis:
       - type: Documentation
         url: https://developers.exlibrisgroup.com/alma/
 common:
+  - type: DomainSecurity
+    url: security/macquarie-domain-security.yml
+  - type: Authentication
+    url: authentication/macquarie-authentication.yml
   - type: OAuthScopes
     url: scopes/macquarie-scopes.yml
   - type: Website
