@@ -94,6 +94,8 @@ apis:
       - type: Documentation
         url: https://developers.exlibrisgroup.com/alma/
 common:
+  - type: AgenticAccess
+    url: agentic-access/macquarie-agentic-access.yml
   - type: DomainSecurity
     url: security/macquarie-domain-security.yml
   - type: Authentication
