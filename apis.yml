@@ -14,9 +14,22 @@ description: >-
   publicly documented Macquarie University developer portal or open-data API
   platform was found during this review.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/macquarie.png
 url: https://raw.githubusercontent.com/api-evangelist/macquarie/refs/heads/main/apis.yml
 tags:
   - Education
@@ -29,70 +42,361 @@ created: '2026-06-03'
 modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
-  - aid: macquarie:rdr-figshare
-    name: Macquarie University Research Data Repository (Figshare API)
-    description: >-
-      The Macquarie University Research Data Repository (RDR) is built on
-      Figshare for Institutions and surfaces its public datasets, theses, and
-      other research outputs through the public Figshare REST API v2. Macquarie
-      content is discoverable via the API (DOI prefix 10.25949, Figshare group
-      id 39392) and the public figshare.mq.edu.au discovery portal.
-    humanURL: https://figshare.mq.edu.au/
-    baseURL: https://api.figshare.com/v2
-    tags: [ Research Data, Repository, Figshare, Open Data, DOI ]
-    properties:
-      - type: OpenAPI
-        url: openapi/macquarie-rdr-figshare.yaml
-      - type: JSONSchema
-        url: json-schema/macquarie-article-schema.json
-      - type: JSONSchema
-        url: json-schema/macquarie-author-schema.json
-      - type: JSONStructure
-        url: json-structure/macquarie-article-structure.json
-      - type: JSONStructure
-        url: json-structure/macquarie-author-structure.json
-      - type: Examples
-        url: examples/macquarie-list-articles-example.json
-      - type: Examples
-        url: examples/macquarie-author-example.json
-      - type: Rules
-        url: rules/macquarie-rules.yml
-      - type: Vocabulary
-        url: vocabulary/macquarie-vocabulary.yml
-      - type: JSONLD
-        url: json-ld/macquarie-context.jsonld
-      - type: Documentation
-        url: https://docs.figshare.com/
-      - type: Documentation
-        url: https://libguides.mq.edu.au/research_data_repository
-  - aid: macquarie:rdr-oai-pmh
-    name: Macquarie University Research Data Repository (OAI-PMH)
-    description: >-
-      The Figshare-backed Research Data Repository exposes metadata for harvest
-      via the OAI-PMH protocol through the Figshare OAI-PMH endpoint, supporting
-      standards-based metadata harvesting of Macquarie research outputs by
-      external aggregators.
-    humanURL: https://docs.figshare.com/
-    baseURL: https://api.figshare.com/v2/oai
-    tags: [ OAI-PMH, Metadata, Harvesting, Repository, Research Data ]
-    properties:
-      - type: Documentation
-        url: https://docs.figshare.com/
-  - aid: macquarie:library-alma-tools
-    name: Macquarie University Library Open-Source Tooling
-    description: >-
-      The Macquarie University Library publishes public open-source utilities on
-      GitHub that integrate with the Ex Libris Alma library services platform
-      (for example an Alma toolkit and resource-sharing partner harvest/sync
-      tools). These consume the Alma APIs rather than exposing a public Macquarie
-      API of their own.
-    humanURL: https://github.com/mqlibrary
-    tags: [ Library, Alma, Ex Libris, Open Source ]
-    properties:
-      - type: GitHub
-        url: https://github.com/mqlibrary
-      - type: Documentation
-        url: https://developers.exlibrisgroup.com/alma/
+- aid: macquarie:rdr-oai-pmh
+  name: Macquarie University Research Data Repository (OAI-PMH)
+  description: >-
+    The Figshare-backed Research Data Repository exposes metadata for harvest via the OAI-PMH protocol
+    through the Figshare OAI-PMH endpoint, supporting standards-based metadata harvesting of Macquarie
+    research outputs by external aggregators.
+  humanURL: https://docs.figshare.com/
+  baseURL: https://api.figshare.com/v2/oai
+  tags:
+  - OAI-PMH
+  - Metadata
+  - Harvesting
+  - Repository
+  - Research Data
+  properties:
+  - type: Documentation
+    url: https://docs.figshare.com/
+- aid: macquarie:library-alma-tools
+  name: Macquarie University Library Open-Source Tooling
+  description: >-
+    The Macquarie University Library publishes public open-source utilities on GitHub that integrate with
+    the Ex Libris Alma library services platform (for example an Alma toolkit and resource-sharing partner
+    harvest/sync tools). These consume the Alma APIs rather than exposing a public Macquarie API of their
+    own.
+  humanURL: https://github.com/mqlibrary
+  tags:
+  - Library
+  - Alma
+  - Ex Libris
+  - Open Source
+  properties:
+  - type: GitHub
+    url: https://github.com/mqlibrary
+  - type: Documentation
+    url: https://developers.exlibrisgroup.com/alma/
+- aid: macquarie:macquarie-altmetric-api
+  name: Macquarie University altmetric API
+  description: The altmetric API from Macquarie University — 1 operation(s) for altmetric.
+  humanURL: https://figshare.mq.edu.au/
+  baseURL: https://api.figshare.com/v2
+  tags:
+  - altmetric
+  properties:
+  - type: OpenAPI
+    url: openapi/macquarie-altmetric-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/macquarie-article-schema.json
+  - type: JSONSchema
+    url: json-schema/macquarie-author-schema.json
+  - type: JSONStructure
+    url: json-structure/macquarie-article-structure.json
+  - type: JSONStructure
+    url: json-structure/macquarie-author-structure.json
+  - type: Examples
+    url: examples/macquarie-list-articles-example.json
+  - type: Examples
+    url: examples/macquarie-author-example.json
+  - type: Rules
+    url: rules/macquarie-rules.yml
+  - type: Vocabulary
+    url: vocabulary/macquarie-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/macquarie-context.jsonld
+  - type: Documentation
+    url: https://docs.figshare.com/
+  - type: Documentation
+    url: https://libguides.mq.edu.au/research_data_repository
+- aid: macquarie:macquarie-articles-api
+  name: Macquarie University articles API
+  description: The articles API from Macquarie University — 34 operation(s) for articles.
+  humanURL: https://figshare.mq.edu.au/
+  baseURL: https://api.figshare.com/v2
+  tags:
+  - articles
+  properties:
+  - type: OpenAPI
+    url: openapi/macquarie-articles-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/macquarie-article-schema.json
+  - type: JSONSchema
+    url: json-schema/macquarie-author-schema.json
+  - type: JSONStructure
+    url: json-structure/macquarie-article-structure.json
+  - type: JSONStructure
+    url: json-structure/macquarie-author-structure.json
+  - type: Examples
+    url: examples/macquarie-list-articles-example.json
+  - type: Examples
+    url: examples/macquarie-author-example.json
+  - type: Rules
+    url: rules/macquarie-rules.yml
+  - type: Vocabulary
+    url: vocabulary/macquarie-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/macquarie-context.jsonld
+  - type: Documentation
+    url: https://docs.figshare.com/
+  - type: Documentation
+    url: https://libguides.mq.edu.au/research_data_repository
+- aid: macquarie:macquarie-authors-api
+  name: Macquarie University authors API
+  description: The authors API from Macquarie University — 2 operation(s) for authors.
+  humanURL: https://figshare.mq.edu.au/
+  baseURL: https://api.figshare.com/v2
+  tags:
+  - authors
+  properties:
+  - type: OpenAPI
+    url: openapi/macquarie-authors-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/macquarie-article-schema.json
+  - type: JSONSchema
+    url: json-schema/macquarie-author-schema.json
+  - type: JSONStructure
+    url: json-structure/macquarie-article-structure.json
+  - type: JSONStructure
+    url: json-structure/macquarie-author-structure.json
+  - type: Examples
+    url: examples/macquarie-list-articles-example.json
+  - type: Examples
+    url: examples/macquarie-author-example.json
+  - type: Rules
+    url: rules/macquarie-rules.yml
+  - type: Vocabulary
+    url: vocabulary/macquarie-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/macquarie-context.jsonld
+  - type: Documentation
+    url: https://docs.figshare.com/
+  - type: Documentation
+    url: https://libguides.mq.edu.au/research_data_repository
+- aid: macquarie:macquarie-collections-api
+  name: Macquarie University collections API
+  description: The collections API from Macquarie University — 21 operation(s) for collections.
+  humanURL: https://figshare.mq.edu.au/
+  baseURL: https://api.figshare.com/v2
+  tags:
+  - collections
+  properties:
+  - type: OpenAPI
+    url: openapi/macquarie-collections-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/macquarie-article-schema.json
+  - type: JSONSchema
+    url: json-schema/macquarie-author-schema.json
+  - type: JSONStructure
+    url: json-structure/macquarie-article-structure.json
+  - type: JSONStructure
+    url: json-structure/macquarie-author-structure.json
+  - type: Examples
+    url: examples/macquarie-list-articles-example.json
+  - type: Examples
+    url: examples/macquarie-author-example.json
+  - type: Rules
+    url: rules/macquarie-rules.yml
+  - type: Vocabulary
+    url: vocabulary/macquarie-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/macquarie-context.jsonld
+  - type: Documentation
+    url: https://docs.figshare.com/
+  - type: Documentation
+    url: https://libguides.mq.edu.au/research_data_repository
+- aid: macquarie:macquarie-institutions-api
+  name: Macquarie University institutions API
+  description: The institutions API from Macquarie University — 20 operation(s) for institutions.
+  humanURL: https://figshare.mq.edu.au/
+  baseURL: https://api.figshare.com/v2
+  tags:
+  - institutions
+  properties:
+  - type: OpenAPI
+    url: openapi/macquarie-institutions-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/macquarie-article-schema.json
+  - type: JSONSchema
+    url: json-schema/macquarie-author-schema.json
+  - type: JSONStructure
+    url: json-structure/macquarie-article-structure.json
+  - type: JSONStructure
+    url: json-structure/macquarie-author-structure.json
+  - type: Examples
+    url: examples/macquarie-list-articles-example.json
+  - type: Examples
+    url: examples/macquarie-author-example.json
+  - type: Rules
+    url: rules/macquarie-rules.yml
+  - type: Vocabulary
+    url: vocabulary/macquarie-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/macquarie-context.jsonld
+  - type: Documentation
+    url: https://docs.figshare.com/
+  - type: Documentation
+    url: https://libguides.mq.edu.au/research_data_repository
+- aid: macquarie:macquarie-oauth-api
+  name: Macquarie University oauth API
+  description: The oauth API from Macquarie University — 1 operation(s) for oauth.
+  humanURL: https://figshare.mq.edu.au/
+  baseURL: https://api.figshare.com/v2
+  tags:
+  - oauth
+  properties:
+  - type: OpenAPI
+    url: openapi/macquarie-oauth-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/macquarie-article-schema.json
+  - type: JSONSchema
+    url: json-schema/macquarie-author-schema.json
+  - type: JSONStructure
+    url: json-structure/macquarie-article-structure.json
+  - type: JSONStructure
+    url: json-structure/macquarie-author-structure.json
+  - type: Examples
+    url: examples/macquarie-list-articles-example.json
+  - type: Examples
+    url: examples/macquarie-author-example.json
+  - type: Rules
+    url: rules/macquarie-rules.yml
+  - type: Vocabulary
+    url: vocabulary/macquarie-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/macquarie-context.jsonld
+  - type: Documentation
+    url: https://docs.figshare.com/
+  - type: Documentation
+    url: https://libguides.mq.edu.au/research_data_repository
+- aid: macquarie:macquarie-other-api
+  name: Macquarie University other API
+  description: The other API from Macquarie University — 7 operation(s) for other.
+  humanURL: https://figshare.mq.edu.au/
+  baseURL: https://api.figshare.com/v2
+  tags:
+  - other
+  properties:
+  - type: OpenAPI
+    url: openapi/macquarie-other-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/macquarie-article-schema.json
+  - type: JSONSchema
+    url: json-schema/macquarie-author-schema.json
+  - type: JSONStructure
+    url: json-structure/macquarie-article-structure.json
+  - type: JSONStructure
+    url: json-structure/macquarie-author-structure.json
+  - type: Examples
+    url: examples/macquarie-list-articles-example.json
+  - type: Examples
+    url: examples/macquarie-author-example.json
+  - type: Rules
+    url: rules/macquarie-rules.yml
+  - type: Vocabulary
+    url: vocabulary/macquarie-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/macquarie-context.jsonld
+  - type: Documentation
+    url: https://docs.figshare.com/
+  - type: Documentation
+    url: https://libguides.mq.edu.au/research_data_repository
+- aid: macquarie:macquarie-profiles-api
+  name: Macquarie University profiles API
+  description: The profiles API from Macquarie University — 2 operation(s) for profiles.
+  humanURL: https://figshare.mq.edu.au/
+  baseURL: https://api.figshare.com/v2
+  tags:
+  - profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/macquarie-profiles-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/macquarie-article-schema.json
+  - type: JSONSchema
+    url: json-schema/macquarie-author-schema.json
+  - type: JSONStructure
+    url: json-structure/macquarie-article-structure.json
+  - type: JSONStructure
+    url: json-structure/macquarie-author-structure.json
+  - type: Examples
+    url: examples/macquarie-list-articles-example.json
+  - type: Examples
+    url: examples/macquarie-author-example.json
+  - type: Rules
+    url: rules/macquarie-rules.yml
+  - type: Vocabulary
+    url: vocabulary/macquarie-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/macquarie-context.jsonld
+  - type: Documentation
+    url: https://docs.figshare.com/
+  - type: Documentation
+    url: https://libguides.mq.edu.au/research_data_repository
+- aid: macquarie:macquarie-projects-api
+  name: Macquarie University projects API
+  description: The projects API from Macquarie University — 17 operation(s) for projects.
+  humanURL: https://figshare.mq.edu.au/
+  baseURL: https://api.figshare.com/v2
+  tags:
+  - projects
+  properties:
+  - type: OpenAPI
+    url: openapi/macquarie-projects-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/macquarie-article-schema.json
+  - type: JSONSchema
+    url: json-schema/macquarie-author-schema.json
+  - type: JSONStructure
+    url: json-structure/macquarie-article-structure.json
+  - type: JSONStructure
+    url: json-structure/macquarie-author-structure.json
+  - type: Examples
+    url: examples/macquarie-list-articles-example.json
+  - type: Examples
+    url: examples/macquarie-author-example.json
+  - type: Rules
+    url: rules/macquarie-rules.yml
+  - type: Vocabulary
+    url: vocabulary/macquarie-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/macquarie-context.jsonld
+  - type: Documentation
+    url: https://docs.figshare.com/
+  - type: Documentation
+    url: https://libguides.mq.edu.au/research_data_repository
+- aid: macquarie:macquarie-symplectic-api
+  name: Macquarie University symplectic API
+  description: The symplectic API from Macquarie University — 5 operation(s) for symplectic.
+  humanURL: https://figshare.mq.edu.au/
+  baseURL: https://api.figshare.com/v2
+  tags:
+  - symplectic
+  properties:
+  - type: OpenAPI
+    url: openapi/macquarie-symplectic-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/macquarie-article-schema.json
+  - type: JSONSchema
+    url: json-schema/macquarie-author-schema.json
+  - type: JSONStructure
+    url: json-structure/macquarie-article-structure.json
+  - type: JSONStructure
+    url: json-structure/macquarie-author-structure.json
+  - type: Examples
+    url: examples/macquarie-list-articles-example.json
+  - type: Examples
+    url: examples/macquarie-author-example.json
+  - type: Rules
+    url: rules/macquarie-rules.yml
+  - type: Vocabulary
+    url: vocabulary/macquarie-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/macquarie-context.jsonld
+  - type: Documentation
+    url: https://docs.figshare.com/
+  - type: Documentation
+    url: https://libguides.mq.edu.au/research_data_repository
 common:
   - type: AgenticAccess
     url: agentic-access/macquarie-agentic-access.yml
