@@ -428,6 +428,9 @@ apis:
   - type: Documentation
     url: https://libguides.mq.edu.au/research_data_repository
 common:
+  - type: CapabilityMap
+    url: capabilities/macquarie-capability-edges.yml
+    name: Macquarie University Business Capability Map
   - type: AgenticAccess
     url: agentic-access/macquarie-agentic-access.yml
   - type: DomainSecurity
