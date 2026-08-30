@@ -1,454 +1,294 @@
 ---
 aid: macquarie
 name: Macquarie University
+x-type: university
+x-category: Public Research University
 description: >-
-  Macquarie University is a public research university in Sydney, Australia,
-  ranked #133 in the QS World University Rankings 2025. Its public,
-  developer-relevant API footprint is concentrated in research-data and library
-  infrastructure rather than a single branded developer portal. The Macquarie
-  University Research Data Repository (RDR) runs on Figshare for Institutions,
-  which exposes content through the public Figshare REST API v2 and an OAI-PMH
-  metadata endpoint; the university Library maintains public open-source tooling
-  on GitHub built around Ex Libris Alma. Authentication for institutional
-  systems is provided via a Shibboleth/SAML identity provider. No dedicated,
-  publicly documented Macquarie University developer portal or open-data API
-  platform was found during this review.
+  Macquarie University is a public research university in Sydney, Australia. Its programmable
+  footprint is small, real, and almost entirely indirect: it operates no developer portal, no
+  open-data platform, and no central API programme. The one institution-operated, keyless,
+  machine-readable API surface found is the Macquarie University Research Portal OAI-PMH endpoint
+  at research-management.mq.edu.au, which serves 114,062 publication records and a person registry
+  over OAI-PMH 2.0 with five metadata formats and no authentication. Beyond it, Macquarie operates
+  a Shibboleth SAML identity provider registered in the Australian Access Federation, a self-hosted
+  Moodle (iLearn) whose web services are credential-gated, and a public library GitHub organisation
+  whose code consumes Ex Libris Alma rather than exposing anything. Everything else that looks like
+  a Macquarie API is a vendor's contract running under Macquarie's name — Figshare for the research
+  data repository, Elsevier Pure for the research portal, CourseLoop for the course handbook, Ex
+  Libris Primo for library discovery. Those relationships are recorded here as tenant surfaces; the
+  vendors' contracts are not.
 type: Index
 deliveryModel:
   model: saas
   open_source: false
-  commercial: true
+  commercial: false
   callable_host: true
   label: Hosted service · you call their endpoint
   confidence: high
   source:
   - openapi
-  - pricing
-  generated: '2026-08-28'
-  method: derived
+  - probes
+  generated: '2026-08-30'
+  method: probed
 accessModel:
   pricing: free
-  onboarding: self-serve
+  onboarding: none
   trial: false
   try_now: true
-  public: false
-  label: Free · Self-serve signup
+  public: true
+  label: Free · No signup, no key
   confidence: high
   source:
-  - plans
   - authentication
-  generated: '2026-07-22'
-  method: derived
-position: Consumer
-access: 3rd-Party
+  - probes
+  generated: '2026-08-30'
+  method: probed
+position: Provider
+access: Public
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/macquarie.png
 url: https://raw.githubusercontent.com/api-evangelist/macquarie/refs/heads/main/apis.yml
 tags:
-  - Education
-  - Higher Education
   - University
-  - Research Data
-  - Library
+  - Higher Education
+  - Education
   - Australia
+  - Group of Eight Peer
+  - Research Data
+  - Research Repository
+  - Metadata Harvesting
+  - OAI-PMH
+  - Identity Federation
+  - Library
+  - Course Catalog
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 specificationVersion: '0.23'
 apis:
-- aid: macquarie:rdr-oai-pmh
-  name: Macquarie University Research Data Repository (OAI-PMH)
+- aid: macquarie:research-portal-oai-pmh
+  name: Macquarie University Research Portal OAI-PMH
+  x-operator: institution
   description: >-
-    The Figshare-backed Research Data Repository exposes metadata for harvest via the OAI-PMH protocol
-    through the Figshare OAI-PMH endpoint, supporting standards-based metadata harvesting of Macquarie
-    research outputs by external aggregators.
-  humanURL: https://docs.figshare.com/
-  baseURL: https://api.figshare.com/v2/oai
+    The one institution-operated, keyless, machine-readable API surface Macquarie publishes.
+    OAI-PMH 2.0 metadata harvesting for the Macquarie University Research Portal, served from the
+    university's own registrable domain, identifying itself as "Macquarie University Research
+    Portal" with adminEmail rms.support@mq.edu.au. All six verbs execute anonymously; five metadata
+    formats are supported (oai_dc, mods, xmetadiss, nl_didl, qdc); publications:all reports a
+    completeListSize of 114,062. The research-information system behind it is Elsevier Pure, but
+    this interface is an open protocol on the institution's host under the institution's identity —
+    Elsevier's own product API at /ws/api is a separate, vendor-owned surface and is recorded below
+    as a tenant relationship, not as Macquarie's.
+  humanURL: https://research-management.mq.edu.au/ws/oai?verb=Identify
+  baseURL: https://research-management.mq.edu.au/ws/oai
   tags:
   - OAI-PMH
-  - Metadata
-  - Harvesting
-  - Repository
+  - Metadata Harvesting
+  - Research Repository
   - Research Data
+  - Publications
+  properties:
+  - type: OpenAPI
+    url: openapi/macquarie-research-portal-oai-pmh-openapi.yml
+  - type: Examples
+    url: examples/macquarie-oai-pmh-examples.json
+  - type: Authentication
+    url: authentication/macquarie-authentication.yml
+  - type: Errors
+    url: errors/macquarie-oai-pmh-errors.yml
+  - type: Conformance
+    url: conformance/macquarie-domain-standards.yml
+  - type: Vocabulary
+    url: vocabulary/macquarie-oai-pmh-vocabulary.yml
+  - type: Rules
+    url: rules/macquarie-oai-pmh-spectral-rules.yml
+  - type: Lifecycle
+    url: lifecycle/macquarie-lifecycle.yml
+  - type: Documentation
+    url: https://www.openarchives.org/OAI/openarchivesprotocol.html
+- aid: macquarie:idp-shibboleth
+  name: Macquarie University Identity Provider (Shibboleth / SAML 2.0)
+  x-operator: institution
+  description: >-
+    Macquarie operates its own Shibboleth identity provider at idp.mq.edu.au, publishing SAML 2.0
+    metadata anonymously at /idp/shibboleth and registered in the Australian Access Federation as
+    entityID urn:mace:federation.org.au:testfed:mq.edu.au since 2018-08-24. The entity asserts
+    REFEDS Research & Scholarship, the REFEDS anonymous / pseudonymous / personalized categories,
+    the GEANT Data Protection Code of Conduct v1, REFEDS Code of Conduct v2, and SIRTFI assurance.
+    Three Macquarie-operated SAML service providers are registered alongside it — iLearn production
+    and staging, and the university LimeSurvey. Institution-operated by definition; the machine
+    readable artifact is XML metadata rather than an HTTP API, so no OpenAPI is claimed.
+  humanURL: https://idp.mq.edu.au/idp/shibboleth
+  baseURL: https://idp.mq.edu.au/idp/profile/SAML2/Redirect/SSO
+  tags:
+  - Identity Federation
+  - SAML
+  - Shibboleth
+  - Single Sign-On
+  - AAF
+  properties:
+  - type: IdentityFederation
+    url: https://idp.mq.edu.au/idp/shibboleth
+  - type: Conformance
+    url: conformance/macquarie-domain-standards.yml
+  - type: Documentation
+    url: https://md.aaf.edu.au/aaf-metadata.xml
+- aid: macquarie:ilearn-moodle-webservices
+  name: Macquarie University iLearn (Moodle) Web Services
+  x-operator: institution
+  description: >-
+    Macquarie self-hosts its learning management system as iLearn at ilearn.mq.edu.au and the
+    Moodle web services REST endpoint answers publicly with a structured invalidtoken error, so the
+    service exists and is reachable but every function is credential-gated. No token is issued to
+    the public and no LTI 1.3 platform endpoint answers (enrol/lti/token.php, mod/lti/certs and
+    .well-known/openid-configuration all return 404), so no contract and no LTI conformance is
+    claimed. Recorded because the host is Macquarie's and the deployment is Macquarie's; the Moodle
+    web-service contract itself is upstream Moodle's and is deliberately not saved here.
+  humanURL: https://ilearn.mq.edu.au/
+  baseURL: https://ilearn.mq.edu.au/webservice/rest/server.php
+  tags:
+  - Learning Management
+  - Moodle
+  - Credentialed
   properties:
   - type: Documentation
-    url: https://docs.figshare.com/
+    url: https://ilearn.mq.edu.au/
 - aid: macquarie:library-alma-tools
   name: Macquarie University Library Open-Source Tooling
+  x-operator: institution
   description: >-
-    The Macquarie University Library publishes public open-source utilities on GitHub that integrate with
-    the Ex Libris Alma library services platform (for example an Alma toolkit and resource-sharing partner
-    harvest/sync tools). These consume the Alma APIs rather than exposing a public Macquarie API of their
-    own.
+    The Macquarie University Library publishes six public repositories on GitHub as the mqlibrary
+    organisation — an Alma toolkit (now archived), resource-sharing partner harvest and sync
+    services, and small extraction utilities for Cardax and Dropbox. Judged by what the artifacts
+    say about themselves rather than by the code host, these are Macquarie-authored. They CONSUME
+    the Ex Libris Alma APIs; none of them exposes a Macquarie API, and none ships a machine-readable
+    contract, so none is catalogued as a surface.
   humanURL: https://github.com/mqlibrary
   tags:
   - Library
   - Alma
   - Ex Libris
-  - Open-Source
-  tags_raw:
-  - Library
-  - Alma
-  - Ex Libris
   - Open Source
   properties:
-  - type: GitHub
+  - type: GitHubOrganization
     url: https://github.com/mqlibrary
   - type: Documentation
     url: https://developers.exlibrisgroup.com/alma/
-- aid: macquarie:macquarie-altmetric-api
-  name: Macquarie University altmetric API
-  description: The altmetric API from Macquarie University — 1 operation(s) for altmetric.
-  humanURL: https://figshare.mq.edu.au/
-  baseURL: https://api.figshare.com/v2
+- aid: macquarie:research-portal-pure
+  name: Macquarie University Research Portal (Elsevier Pure)
+  x-operator: tenant
+  description: >-
+    Macquarie's research-information system is Elsevier Pure, tenanted on Macquarie hosts —
+    researchers.mq.edu.au for the public portal and research-management.mq.edu.au for the
+    administrative side. The Pure API at /ws/api is api-key gated and its OpenAPI description is
+    publicly readable at /ws/api/openapi.json, and it is ELSEVIER'S CONTRACT, not Macquarie's:
+    info.title "Pure API", info.contact pure-support@elsevier.com, version 5.33.3-3, 568 paths, and
+    a relative servers url of /ws/api that hides the host from any host-based ownership check. This
+    is the exact shape that put 36 Elsevier Pure specs into Manchester's repo under Manchester's
+    name. The relationship is recorded; the contract is not saved here and belongs to Elsevier.
+  humanURL: https://researchers.mq.edu.au/
+  baseURL: https://research-management.mq.edu.au/ws/api
   tags:
-  - altmetric
+  - Research Repository
+  - Pure
+  - Elsevier
+  - Current Research Information System
   properties:
-  - type: OpenAPI
-    url: openapi/macquarie-altmetric-api-openapi.yml
-  - type: JSONSchema
-    url: json-schema/macquarie-article-schema.json
-  - type: JSONSchema
-    url: json-schema/macquarie-author-schema.json
-  - type: JSONStructure
-    url: json-structure/macquarie-article-structure.json
-  - type: JSONStructure
-    url: json-structure/macquarie-author-structure.json
-  - type: Examples
-    url: examples/macquarie-list-articles-example.json
-  - type: Examples
-    url: examples/macquarie-author-example.json
-  - type: Rules
-    url: rules/macquarie-rules.yml
-  - type: Vocabulary
-    url: vocabulary/macquarie-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/macquarie-context.jsonld
+  - type: ResearchRepository
+    url: https://researchers.mq.edu.au/
   - type: Documentation
-    url: https://docs.figshare.com/
-  - type: Documentation
-    url: https://libguides.mq.edu.au/research_data_repository
-- aid: macquarie:macquarie-articles-api
-  name: Macquarie University articles API
-  description: The articles API from Macquarie University — 34 operation(s) for articles.
+    url: https://research-management.mq.edu.au/ws/api/openapi.json
+- aid: macquarie:rdr-figshare
+  name: Macquarie University Research Data Repository (Figshare)
+  x-operator: tenant
+  description: >-
+    The Macquarie University Research Data Repository is Figshare for Institutions, tenanted at
+    figshare.mq.edu.au with DOI prefix 10.25949 minted through DataCite as ARDCX.MQU. The data,
+    the DOIs and the curation are Macquarie's; the API is Figshare's generic v2 contract at
+    api.figshare.com, shared with at least fourteen other institutions in this catalog. Eleven
+    apis[] entries and ten OpenAPI documents derived from that one Figshare spec were removed from
+    this repo on 2026-08-30. The tenant host itself is behind an AWS WAF challenge (HTTP 202,
+    x-amzn-waf-action challenge) and cannot be probed anonymously.
   humanURL: https://figshare.mq.edu.au/
-  baseURL: https://api.figshare.com/v2
   tags:
-  - Articles
-  tags_raw:
-  - articles
+  - Research Data
+  - Research Repository
+  - Figshare
+  - DataCite
+  - DOI
   properties:
-  - type: OpenAPI
-    url: openapi/macquarie-articles-api-openapi.yml
-  - type: JSONSchema
-    url: json-schema/macquarie-article-schema.json
-  - type: JSONSchema
-    url: json-schema/macquarie-author-schema.json
-  - type: JSONStructure
-    url: json-structure/macquarie-article-structure.json
-  - type: JSONStructure
-    url: json-structure/macquarie-author-structure.json
-  - type: Examples
-    url: examples/macquarie-list-articles-example.json
-  - type: Examples
-    url: examples/macquarie-author-example.json
-  - type: Rules
-    url: rules/macquarie-rules.yml
-  - type: Vocabulary
-    url: vocabulary/macquarie-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/macquarie-context.jsonld
-  - type: Documentation
-    url: https://docs.figshare.com/
+  - type: ResearchRepository
+    url: https://figshare.mq.edu.au/
   - type: Documentation
     url: https://libguides.mq.edu.au/research_data_repository
-- aid: macquarie:macquarie-authors-api
-  name: Macquarie University authors API
-  description: The authors API from Macquarie University — 2 operation(s) for authors.
-  humanURL: https://figshare.mq.edu.au/
-  baseURL: https://api.figshare.com/v2
+- aid: macquarie:course-handbook-courseloop
+  name: Macquarie University Course Handbook (CourseLoop)
+  x-operator: tenant
+  description: >-
+    The Macquarie course handbook runs on CourseLoop as tenant siteId mq-prod-pres, served at
+    coursehandbook.mq.edu.au from a shared vendor API at api-ap-southeast-2.prod.courseloop.com.
+    The curriculum data is Macquarie's; the API and the front end are CourseLoop's and are shared
+    with its other university customers, the shared codebase still carrying UNSW-specific CSS class
+    names. Anonymous calls to the vendor API return 403, so there is no keyless surface and no
+    contract to save.
+  humanURL: https://coursehandbook.mq.edu.au/
   tags:
-  - Authors
-  tags_raw:
-  - authors
+  - Course Catalog
+  - Curriculum
+  - CourseLoop
   properties:
-  - type: OpenAPI
-    url: openapi/macquarie-authors-api-openapi.yml
-  - type: JSONSchema
-    url: json-schema/macquarie-article-schema.json
-  - type: JSONSchema
-    url: json-schema/macquarie-author-schema.json
-  - type: JSONStructure
-    url: json-structure/macquarie-article-structure.json
-  - type: JSONStructure
-    url: json-structure/macquarie-author-structure.json
-  - type: Examples
-    url: examples/macquarie-list-articles-example.json
-  - type: Examples
-    url: examples/macquarie-author-example.json
-  - type: Rules
-    url: rules/macquarie-rules.yml
-  - type: Vocabulary
-    url: vocabulary/macquarie-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/macquarie-context.jsonld
-  - type: Documentation
-    url: https://docs.figshare.com/
-  - type: Documentation
-    url: https://libguides.mq.edu.au/research_data_repository
-- aid: macquarie:macquarie-collections-api
-  name: Macquarie University collections API
-  description: The collections API from Macquarie University — 21 operation(s) for collections.
-  humanURL: https://figshare.mq.edu.au/
-  baseURL: https://api.figshare.com/v2
+  - type: CourseCatalog
+    url: https://coursehandbook.mq.edu.au/
+- aid: macquarie:library-multisearch-primo
+  name: Macquarie University Library MultiSearch (Ex Libris Primo)
+  x-operator: tenant
+  description: >-
+    Library discovery for Macquarie runs on Ex Libris Primo at multisearch.mq.edu.au. The holdings
+    are Macquarie's; Primo and the Alma platform beneath it are Ex Libris's, and the Alma/Primo
+    APIs are gated behind developer keys issued by Ex Libris to the institution rather than
+    published by it. Recorded as a tenant relationship with no contract.
+  humanURL: https://multisearch.mq.edu.au/
   tags:
-  - Collection
-  tags_raw:
-  - collections
+  - Library
+  - Discovery
+  - Primo
+  - Ex Libris
   properties:
-  - type: OpenAPI
-    url: openapi/macquarie-collections-api-openapi.yml
-  - type: JSONSchema
-    url: json-schema/macquarie-article-schema.json
-  - type: JSONSchema
-    url: json-schema/macquarie-author-schema.json
-  - type: JSONStructure
-    url: json-structure/macquarie-article-structure.json
-  - type: JSONStructure
-    url: json-structure/macquarie-author-structure.json
-  - type: Examples
-    url: examples/macquarie-list-articles-example.json
-  - type: Examples
-    url: examples/macquarie-author-example.json
-  - type: Rules
-    url: rules/macquarie-rules.yml
-  - type: Vocabulary
-    url: vocabulary/macquarie-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/macquarie-context.jsonld
-  - type: Documentation
-    url: https://docs.figshare.com/
-  - type: Documentation
-    url: https://libguides.mq.edu.au/research_data_repository
-- aid: macquarie:macquarie-institutions-api
-  name: Macquarie University institutions API
-  description: The institutions API from Macquarie University — 20 operation(s) for institutions.
-  humanURL: https://figshare.mq.edu.au/
-  baseURL: https://api.figshare.com/v2
-  tags:
-  - institutions
-  properties:
-  - type: OpenAPI
-    url: openapi/macquarie-institutions-api-openapi.yml
-  - type: JSONSchema
-    url: json-schema/macquarie-article-schema.json
-  - type: JSONSchema
-    url: json-schema/macquarie-author-schema.json
-  - type: JSONStructure
-    url: json-structure/macquarie-article-structure.json
-  - type: JSONStructure
-    url: json-structure/macquarie-author-structure.json
-  - type: Examples
-    url: examples/macquarie-list-articles-example.json
-  - type: Examples
-    url: examples/macquarie-author-example.json
-  - type: Rules
-    url: rules/macquarie-rules.yml
-  - type: Vocabulary
-    url: vocabulary/macquarie-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/macquarie-context.jsonld
-  - type: Documentation
-    url: https://docs.figshare.com/
-  - type: Documentation
-    url: https://libguides.mq.edu.au/research_data_repository
-- aid: macquarie:macquarie-oauth-api
-  name: Macquarie University oauth API
-  description: The oauth API from Macquarie University — 1 operation(s) for oauth.
-  humanURL: https://figshare.mq.edu.au/
-  baseURL: https://api.figshare.com/v2
-  tags:
-  - Authentication
-  tags_raw:
-  - oauth
-  properties:
-  - type: OpenAPI
-    url: openapi/macquarie-oauth-api-openapi.yml
-  - type: JSONSchema
-    url: json-schema/macquarie-article-schema.json
-  - type: JSONSchema
-    url: json-schema/macquarie-author-schema.json
-  - type: JSONStructure
-    url: json-structure/macquarie-article-structure.json
-  - type: JSONStructure
-    url: json-structure/macquarie-author-structure.json
-  - type: Examples
-    url: examples/macquarie-list-articles-example.json
-  - type: Examples
-    url: examples/macquarie-author-example.json
-  - type: Rules
-    url: rules/macquarie-rules.yml
-  - type: Vocabulary
-    url: vocabulary/macquarie-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/macquarie-context.jsonld
-  - type: Documentation
-    url: https://docs.figshare.com/
-  - type: Documentation
-    url: https://libguides.mq.edu.au/research_data_repository
-- aid: macquarie:macquarie-other-api
-  name: Macquarie University other API
-  description: The other API from Macquarie University — 7 operation(s) for other.
-  humanURL: https://figshare.mq.edu.au/
-  baseURL: https://api.figshare.com/v2
-  tags: []
-  tags_raw:
-  - other
-  properties:
-  - type: OpenAPI
-    url: openapi/macquarie-other-api-openapi.yml
-  - type: JSONSchema
-    url: json-schema/macquarie-article-schema.json
-  - type: JSONSchema
-    url: json-schema/macquarie-author-schema.json
-  - type: JSONStructure
-    url: json-structure/macquarie-article-structure.json
-  - type: JSONStructure
-    url: json-structure/macquarie-author-structure.json
-  - type: Examples
-    url: examples/macquarie-list-articles-example.json
-  - type: Examples
-    url: examples/macquarie-author-example.json
-  - type: Rules
-    url: rules/macquarie-rules.yml
-  - type: Vocabulary
-    url: vocabulary/macquarie-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/macquarie-context.jsonld
-  - type: Documentation
-    url: https://docs.figshare.com/
-  - type: Documentation
-    url: https://libguides.mq.edu.au/research_data_repository
-- aid: macquarie:macquarie-profiles-api
-  name: Macquarie University profiles API
-  description: The profiles API from Macquarie University — 2 operation(s) for profiles.
-  humanURL: https://figshare.mq.edu.au/
-  baseURL: https://api.figshare.com/v2
-  tags:
-  - Profiles
-  tags_raw:
-  - profiles
-  properties:
-  - type: OpenAPI
-    url: openapi/macquarie-profiles-api-openapi.yml
-  - type: JSONSchema
-    url: json-schema/macquarie-article-schema.json
-  - type: JSONSchema
-    url: json-schema/macquarie-author-schema.json
-  - type: JSONStructure
-    url: json-structure/macquarie-article-structure.json
-  - type: JSONStructure
-    url: json-structure/macquarie-author-structure.json
-  - type: Examples
-    url: examples/macquarie-list-articles-example.json
-  - type: Examples
-    url: examples/macquarie-author-example.json
-  - type: Rules
-    url: rules/macquarie-rules.yml
-  - type: Vocabulary
-    url: vocabulary/macquarie-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/macquarie-context.jsonld
-  - type: Documentation
-    url: https://docs.figshare.com/
-  - type: Documentation
-    url: https://libguides.mq.edu.au/research_data_repository
-- aid: macquarie:macquarie-projects-api
-  name: Macquarie University projects API
-  description: The projects API from Macquarie University — 17 operation(s) for projects.
-  humanURL: https://figshare.mq.edu.au/
-  baseURL: https://api.figshare.com/v2
-  tags:
-  - Project
-  tags_raw:
-  - projects
-  properties:
-  - type: OpenAPI
-    url: openapi/macquarie-projects-api-openapi.yml
-  - type: JSONSchema
-    url: json-schema/macquarie-article-schema.json
-  - type: JSONSchema
-    url: json-schema/macquarie-author-schema.json
-  - type: JSONStructure
-    url: json-structure/macquarie-article-structure.json
-  - type: JSONStructure
-    url: json-structure/macquarie-author-structure.json
-  - type: Examples
-    url: examples/macquarie-list-articles-example.json
-  - type: Examples
-    url: examples/macquarie-author-example.json
-  - type: Rules
-    url: rules/macquarie-rules.yml
-  - type: Vocabulary
-    url: vocabulary/macquarie-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/macquarie-context.jsonld
-  - type: Documentation
-    url: https://docs.figshare.com/
-  - type: Documentation
-    url: https://libguides.mq.edu.au/research_data_repository
-- aid: macquarie:macquarie-symplectic-api
-  name: Macquarie University symplectic API
-  description: The symplectic API from Macquarie University — 5 operation(s) for symplectic.
-  humanURL: https://figshare.mq.edu.au/
-  baseURL: https://api.figshare.com/v2
-  tags:
-  - symplectic
-  properties:
-  - type: OpenAPI
-    url: openapi/macquarie-symplectic-api-openapi.yml
-  - type: JSONSchema
-    url: json-schema/macquarie-article-schema.json
-  - type: JSONSchema
-    url: json-schema/macquarie-author-schema.json
-  - type: JSONStructure
-    url: json-structure/macquarie-article-structure.json
-  - type: JSONStructure
-    url: json-structure/macquarie-author-structure.json
-  - type: Examples
-    url: examples/macquarie-list-articles-example.json
-  - type: Examples
-    url: examples/macquarie-author-example.json
-  - type: Rules
-    url: rules/macquarie-rules.yml
-  - type: Vocabulary
-    url: vocabulary/macquarie-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/macquarie-context.jsonld
-  - type: Documentation
-    url: https://docs.figshare.com/
-  - type: Documentation
-    url: https://libguides.mq.edu.au/research_data_repository
+  - type: LibraryCatalog
+    url: https://multisearch.mq.edu.au/
 common:
-  - type: CapabilityMap
-    url: capabilities/macquarie-capability-edges.yml
-    name: Macquarie University Business Capability Map
-  - type: AgenticAccess
-    url: agentic-access/macquarie-agentic-access.yml
-  - type: DomainSecurity
-    url: security/macquarie-domain-security.yml
-  - type: Authentication
-    url: authentication/macquarie-authentication.yml
-  - type: OAuthScopes
-    url: scopes/macquarie-scopes.yml
   - type: Website
     url: https://www.mq.edu.au/
-  - type: GitHub
-    url: https://github.com/macquarie-university
-  - type: GitHub
+  - type: GitHubOrganization
     url: https://github.com/mqlibrary
   - type: LinkedIn
     url: https://www.linkedin.com/school/macquarie-university/
-  - type: Authentication
+  - type: IdentityFederation
     url: https://idp.mq.edu.au/idp/shibboleth
+  - type: IdentityFederation
+    url: https://md.aaf.edu.au/aaf-metadata.xml
+  - type: ResearchRepository
+    url: https://researchers.mq.edu.au/
+  - type: ResearchRepository
+    url: https://figshare.mq.edu.au/
+  - type: CourseCatalog
+    url: https://coursehandbook.mq.edu.au/
+  - type: LibraryCatalog
+    url: https://multisearch.mq.edu.au/
+  - type: AIPolicy
+    url: https://policies.mq.edu.au/document/view.php?id=394
+  - type: PrivacyPolicy
+    url: https://policies.mq.edu.au/document/view.php?id=107
+  - type: TermsOfService
+    url: https://policies.mq.edu.au/document/view.php?id=234
+  - type: Documentation
+    url: https://libguides.mq.edu.au/research_data_repository
+  - type: Support
+    url: https://policies.mq.edu.au/contact.php
+  - type: Conformance
+    url: conformance/macquarie-domain-standards.yml
+  - type: Authentication
+    url: authentication/macquarie-authentication.yml
+  - type: DomainSecurity
+    url: security/macquarie-domain-security.yml
   - type: Plans
     url: plans/macquarie-plans-pricing.yml
   - type: RateLimits
@@ -457,6 +297,91 @@ common:
     url: finops/macquarie-finops.yml
   - type: Review
     url: review.yml
+x-coverage:
+  state: covered
+  reason: covered
+  detail: >-
+    One institution-operated, keyless, machine-readable API surface was found, verified and
+    catalogued — the Macquarie University Research Portal OAI-PMH endpoint at
+    research-management.mq.edu.au, with 114,062 publication records, five metadata formats and all
+    six OAI-PMH verbs executing anonymously. Coverage is otherwise thin because it genuinely is:
+    Macquarie operates no developer portal, no open-data platform and no course/timetable API of
+    its own; api.mq.edu.au, developer.mq.edu.au, data.mq.edu.au, timetable.mq.edu.au and
+    status.mq.edu.au do not resolve. Four surface classes that look institutional are vendor
+    contracts on tenant hosts (Elsevier Pure, Figshare, CourseLoop, Ex Libris Primo) and are
+    recorded as tenant relationships without their contracts. www.mq.edu.au is bot-blocked (403 to
+    every request including robots.txt and llms.txt) and figshare.mq.edu.au is behind an AWS WAF
+    challenge, so neither could be read directly; both are LIVE, not dead.
+  assessed: '2026-08-30'
+  method: pipeline-university.md STEP 1-5, live probes
+  evidence:
+  - url: https://research-management.mq.edu.au/ws/oai?verb=Identify
+    status: 200
+  - url: https://research-management.mq.edu.au/ws/oai?verb=ListMetadataFormats
+    status: 200
+  - url: https://research-management.mq.edu.au/ws/oai?verb=ListIdentifiers&metadataPrefix=oai_dc&set=publications:all
+    status: 200
+  - url: https://research-management.mq.edu.au/ws/api/openapi.json
+    status: 200
+  - url: https://idp.mq.edu.au/idp/shibboleth
+    status: 200
+  - url: https://md.aaf.edu.au/aaf-metadata.xml
+    status: 200
+  - url: https://api.datacite.org/prefixes/10.25949
+    status: 200
+  - url: https://ilearn.mq.edu.au/webservice/rest/server.php
+    status: 200
+  - url: https://coursehandbook.mq.edu.au/
+    status: 200
+  - url: https://api-ap-southeast-2.prod.courseloop.com/publisher/search-all?siteId=mq-prod-pres
+    status: 403
+  - url: https://multisearch.mq.edu.au/
+    status: 200
+  - url: https://figshare.mq.edu.au/
+    status: 202
+  - url: https://www.mq.edu.au/
+    status: 403
+  - url: https://api.mq.edu.au/
+    status: 0
+  - url: https://developer.mq.edu.au/
+    status: 0
+  - url: https://data.mq.edu.au/
+    status: 0
+  - url: https://timetable.mq.edu.au/
+    status: 0
+x-attribution-correction:
+  applied: '2026-08-30'
+  by: pipeline-university.md STEP 6b, file-by-file
+  removed_entries: 11
+  removed_files: 47
+  what: >-
+    Eleven apis[] entries and forty-seven artifact files, all derived from ONE saved copy of the
+    generic Figshare API v2 contract (info.title "Figshare API (Macquarie University Research Data
+    Repository)", info.contact "Figshare Support", servers https://api.figshare.com/v2). The June
+    2026 profile saved that vendor spec under Macquarie's slug, refine-openapis split it into ten
+    per-tag documents, and eleven apis[] entries plus schemas, structures, examples, rules,
+    vocabulary, a JSON-LD context, scopes, an authentication profile, an agentic-access card,
+    capability edges and twenty-one collection documents were derived from it. Every one inherited Figshare's
+    provenance. api.figshare.com is claimed by fourteen other institutions in this catalog.
+  audit-divergence: >-
+    audit-university-contracts.py reaches its verdict from the HOSTNAME, so it now reads all four
+    tenant surfaces here as `institution` — figshare.mq.edu.au, coursehandbook.mq.edu.au,
+    multisearch.mq.edu.au and research-management.mq.edu.au are all mq.edu.au subdomains. The
+    x-operator values in this file are the more precise call, reached from what each surface says
+    about itself (CourseLoop siteId mq-prod-pres on api-ap-southeast-2.prod.courseloop.com;
+    Elsevier's "Pure API" contract with pure-support@elsevier.com; Figshare for Institutions;
+    Ex Libris Primo). Do not let a later host-based pass overwrite them.
+  shared-contract-false-positive: >-
+    The audit flags openapi/macquarie-research-portal-oai-pmh-openapi.yml as a shared contract
+    because Maastricht ships a spec whose normalized title matches ("<Institution> Research Portal
+    OAI-PMH"). It is not shared. Both were independently derived from each institution's own live
+    endpoint on the same day, and the documents differ in host, admin contact, metadata formats,
+    set hierarchy and record count. This is the same class of false positive the contract already
+    records for Washington's uw.edu contact domain.
+  note: >-
+    The tenant relationship was NOT deleted — figshare.mq.edu.au is Macquarie's repository, holding
+    Macquarie's data under Macquarie's DOI prefix, and survives as macquarie:rdr-figshare with
+    x-operator tenant. Only the contract and its derivatives went.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
