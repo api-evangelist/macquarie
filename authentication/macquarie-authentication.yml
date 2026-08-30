@@ -1,0 +1,54 @@
+# authorship: derived by API Evangelist from live, unauthenticated probes of the endpoint
+# on 2026-08-30. Macquarie University publishes no such document; this is OURS, not theirs.
+# x-method: derived
+# x-source-url: https://research-management.mq.edu.au/ws/oai
+generated: '2026-08-30'
+method: probed
+source: https://research-management.mq.edu.au/ws/oai
+x-operator: institution
+summary:
+  types:
+  - none
+  note: >-
+    The institution-operated surface in this repo — the Macquarie University Research Portal
+    OAI-PMH endpoint — requires NO authentication. Every verb was executed anonymously over HTTPS
+    and returned 200. There is no key, no token, no registration and no rate-limit header.
+schemes:
+- name: none
+  type: none
+  description: Anonymous HTTPS GET. Confirmed by executing all six OAI-PMH verbs with no credential.
+  evidence:
+  - url: https://research-management.mq.edu.au/ws/oai?verb=Identify
+    status: 200
+  - url: https://research-management.mq.edu.au/ws/oai?verb=ListMetadataFormats
+    status: 200
+  - url: https://research-management.mq.edu.au/ws/oai?verb=ListIdentifiers&metadataPrefix=oai_dc&set=publications:all
+    status: 200
+  sources:
+  - openapi/macquarie-research-portal-oai-pmh-openapi.yml
+transport:
+  https: true
+  hsts: 'max-age=2592000; preload'
+  x_content_type_options: nosniff
+  observed: '2026-08-30'
+not_covered:
+  - surface: Elsevier Pure API at https://research-management.mq.edu.au/ws/api
+    scheme: apiKey header `api-key`
+    x-operator: tenant
+    why: >-
+      The contract at /ws/api is Elsevier's — info.title "Pure API", contact
+      pure-support@elsevier.com, version 5.33.3-3, relative servers url /ws/api. It is a vendor
+      product spec served from a tenant host and is deliberately not described in this repo. Its
+      auth scheme is recorded here only so the absence is not mistaken for an oversight.
+  - surface: Macquarie University Research Data Repository at https://figshare.mq.edu.au
+    scheme: Figshare OAuth 2.0 (authorizationCode) on api.figshare.com
+    x-operator: tenant
+    why: >-
+      Figshare's generic OAuth, shared by every Figshare for Institutions customer. Removed from
+      this repo on 2026-08-30 along with the Figshare contract it was derived from.
+  - surface: Shibboleth IdP at https://idp.mq.edu.au/idp/shibboleth
+    scheme: SAML 2.0 (institution-operated)
+    x-operator: institution
+    why: >-
+      A federated browser SSO profile, not an HTTP API auth scheme. Recorded as an
+      IdentityFederation surface and in conformance/macquarie-domain-standards.yml instead.
