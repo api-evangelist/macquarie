@@ -166,6 +166,11 @@ apis:
   - Library
   - Alma
   - Ex Libris
+  - Open-Source
+  tags_raw:
+  - Library
+  - Alma
+  - Ex Libris
   - Open Source
   properties:
   - type: GitHubOrganization
