@@ -64,58 +64,17 @@ created: '2026-06-03'
 modified: '2026-08-30'
 specificationVersion: '0.23'
 apis:
-- aid: macquarie:research-portal-oai-pmh
-  name: Macquarie University Research Portal OAI-PMH
-  x-operator: institution
-  description: >-
-    The one institution-operated, keyless, machine-readable API surface Macquarie publishes.
-    OAI-PMH 2.0 metadata harvesting for the Macquarie University Research Portal, served from the
-    university's own registrable domain, identifying itself as "Macquarie University Research
-    Portal" with adminEmail rms.support@mq.edu.au. All six verbs execute anonymously; five metadata
-    formats are supported (oai_dc, mods, xmetadiss, nl_didl, qdc); publications:all reports a
-    completeListSize of 114,062. The research-information system behind it is Elsevier Pure, but
-    this interface is an open protocol on the institution's host under the institution's identity —
-    Elsevier's own product API at /ws/api is a separate, vendor-owned surface and is recorded below
-    as a tenant relationship, not as Macquarie's.
-  humanURL: https://research-management.mq.edu.au/ws/oai?verb=Identify
-  baseURL: https://research-management.mq.edu.au/ws/oai
-  tags:
-  - OAI-PMH
-  - Metadata Harvesting
-  - Research Repository
-  - Research Data
-  - Publications
-  properties:
-  - type: OpenAPI
-    url: openapi/macquarie-research-portal-oai-pmh-openapi.yml
-  - type: Examples
-    url: examples/macquarie-oai-pmh-examples.json
-  - type: Authentication
-    url: authentication/macquarie-authentication.yml
-  - type: Errors
-    url: errors/macquarie-oai-pmh-errors.yml
-  - type: Conformance
-    url: conformance/macquarie-domain-standards.yml
-  - type: Vocabulary
-    url: vocabulary/macquarie-oai-pmh-vocabulary.yml
-  - type: Rules
-    url: rules/macquarie-oai-pmh-spectral-rules.yml
-  - type: Lifecycle
-    url: lifecycle/macquarie-lifecycle.yml
-  - type: Documentation
-    url: https://www.openarchives.org/OAI/openarchivesprotocol.html
 - aid: macquarie:idp-shibboleth
   name: Macquarie University Identity Provider (Shibboleth / SAML 2.0)
   x-operator: institution
   description: >-
-    Macquarie operates its own Shibboleth identity provider at idp.mq.edu.au, publishing SAML 2.0
-    metadata anonymously at /idp/shibboleth and registered in the Australian Access Federation as
-    entityID urn:mace:federation.org.au:testfed:mq.edu.au since 2018-08-24. The entity asserts
-    REFEDS Research & Scholarship, the REFEDS anonymous / pseudonymous / personalized categories,
-    the GEANT Data Protection Code of Conduct v1, REFEDS Code of Conduct v2, and SIRTFI assurance.
-    Three Macquarie-operated SAML service providers are registered alongside it — iLearn production
-    and staging, and the university LimeSurvey. Institution-operated by definition; the machine
-    readable artifact is XML metadata rather than an HTTP API, so no OpenAPI is claimed.
+    Macquarie operates its own Shibboleth identity provider at idp.mq.edu.au, publishing SAML 2.0 metadata
+    anonymously at /idp/shibboleth and registered in the Australian Access Federation as entityID urn:mace:federation.org.au:testfed:mq.edu.au
+    since 2018-08-24. The entity asserts REFEDS Research & Scholarship, the REFEDS anonymous / pseudonymous
+    / personalized categories, the GEANT Data Protection Code of Conduct v1, REFEDS Code of Conduct v2,
+    and SIRTFI assurance. Three Macquarie-operated SAML service providers are registered alongside it
+    — iLearn production and staging, and the university LimeSurvey. Institution-operated by definition;
+    the machine readable artifact is XML metadata rather than an HTTP API, so no OpenAPI is claimed.
   humanURL: https://idp.mq.edu.au/idp/shibboleth
   baseURL: https://idp.mq.edu.au/idp/profile/SAML2/Redirect/SSO
   tags:
@@ -135,13 +94,13 @@ apis:
   name: Macquarie University iLearn (Moodle) Web Services
   x-operator: institution
   description: >-
-    Macquarie self-hosts its learning management system as iLearn at ilearn.mq.edu.au and the
-    Moodle web services REST endpoint answers publicly with a structured invalidtoken error, so the
-    service exists and is reachable but every function is credential-gated. No token is issued to
-    the public and no LTI 1.3 platform endpoint answers (enrol/lti/token.php, mod/lti/certs and
-    .well-known/openid-configuration all return 404), so no contract and no LTI conformance is
-    claimed. Recorded because the host is Macquarie's and the deployment is Macquarie's; the Moodle
-    web-service contract itself is upstream Moodle's and is deliberately not saved here.
+    Macquarie self-hosts its learning management system as iLearn at ilearn.mq.edu.au and the Moodle web
+    services REST endpoint answers publicly with a structured invalidtoken error, so the service exists
+    and is reachable but every function is credential-gated. No token is issued to the public and no LTI
+    1.3 platform endpoint answers (enrol/lti/token.php, mod/lti/certs and .well-known/openid-configuration
+    all return 404), so no contract and no LTI conformance is claimed. Recorded because the host is Macquarie's
+    and the deployment is Macquarie's; the Moodle web-service contract itself is upstream Moodle's and
+    is deliberately not saved here.
   humanURL: https://ilearn.mq.edu.au/
   baseURL: https://ilearn.mq.edu.au/webservice/rest/server.php
   tags:
@@ -155,12 +114,11 @@ apis:
   name: Macquarie University Library Open-Source Tooling
   x-operator: institution
   description: >-
-    The Macquarie University Library publishes six public repositories on GitHub as the mqlibrary
-    organisation — an Alma toolkit (now archived), resource-sharing partner harvest and sync
-    services, and small extraction utilities for Cardax and Dropbox. Judged by what the artifacts
-    say about themselves rather than by the code host, these are Macquarie-authored. They CONSUME
-    the Ex Libris Alma APIs; none of them exposes a Macquarie API, and none ships a machine-readable
-    contract, so none is catalogued as a surface.
+    The Macquarie University Library publishes six public repositories on GitHub as the mqlibrary organisation
+    — an Alma toolkit (now archived), resource-sharing partner harvest and sync services, and small extraction
+    utilities for Cardax and Dropbox. Judged by what the artifacts say about themselves rather than by
+    the code host, these are Macquarie-authored. They CONSUME the Ex Libris Alma APIs; none of them exposes
+    a Macquarie API, and none ships a machine-readable contract, so none is catalogued as a surface.
   humanURL: https://github.com/mqlibrary
   tags:
   - Library
@@ -181,14 +139,13 @@ apis:
   name: Macquarie University Research Portal (Elsevier Pure)
   x-operator: tenant
   description: >-
-    Macquarie's research-information system is Elsevier Pure, tenanted on Macquarie hosts —
-    researchers.mq.edu.au for the public portal and research-management.mq.edu.au for the
-    administrative side. The Pure API at /ws/api is api-key gated and its OpenAPI description is
-    publicly readable at /ws/api/openapi.json, and it is ELSEVIER'S CONTRACT, not Macquarie's:
-    info.title "Pure API", info.contact pure-support@elsevier.com, version 5.33.3-3, 568 paths, and
-    a relative servers url of /ws/api that hides the host from any host-based ownership check. This
-    is the exact shape that put 36 Elsevier Pure specs into Manchester's repo under Manchester's
-    name. The relationship is recorded; the contract is not saved here and belongs to Elsevier.
+    Macquarie's research-information system is Elsevier Pure, tenanted on Macquarie hosts — researchers.mq.edu.au
+    for the public portal and research-management.mq.edu.au for the administrative side. The Pure API
+    at /ws/api is api-key gated and its OpenAPI description is publicly readable at /ws/api/openapi.json,
+    and it is ELSEVIER'S CONTRACT, not Macquarie's: info.title "Pure API", info.contact pure-support@elsevier.com,
+    version 5.33.3-3, 568 paths, and a relative servers url of /ws/api that hides the host from any host-based
+    ownership check. This is the exact shape that put 36 Elsevier Pure specs into Manchester's repo under
+    Manchester's name. The relationship is recorded; the contract is not saved here and belongs to Elsevier.
   humanURL: https://researchers.mq.edu.au/
   baseURL: https://research-management.mq.edu.au/ws/api
   tags:
@@ -205,13 +162,12 @@ apis:
   name: Macquarie University Research Data Repository (Figshare)
   x-operator: tenant
   description: >-
-    The Macquarie University Research Data Repository is Figshare for Institutions, tenanted at
-    figshare.mq.edu.au with DOI prefix 10.25949 minted through DataCite as ARDCX.MQU. The data,
-    the DOIs and the curation are Macquarie's; the API is Figshare's generic v2 contract at
-    api.figshare.com, shared with at least fourteen other institutions in this catalog. Eleven
-    apis[] entries and ten OpenAPI documents derived from that one Figshare spec were removed from
-    this repo on 2026-08-30. The tenant host itself is behind an AWS WAF challenge (HTTP 202,
-    x-amzn-waf-action challenge) and cannot be probed anonymously.
+    The Macquarie University Research Data Repository is Figshare for Institutions, tenanted at figshare.mq.edu.au
+    with DOI prefix 10.25949 minted through DataCite as ARDCX.MQU. The data, the DOIs and the curation
+    are Macquarie's; the API is Figshare's generic v2 contract at api.figshare.com, shared with at least
+    fourteen other institutions in this catalog. Eleven apis[] entries and ten OpenAPI documents derived
+    from that one Figshare spec were removed from this repo on 2026-08-30. The tenant host itself is behind
+    an AWS WAF challenge (HTTP 202, x-amzn-waf-action challenge) and cannot be probed anonymously.
   humanURL: https://figshare.mq.edu.au/
   tags:
   - Research Data
@@ -228,12 +184,11 @@ apis:
   name: Macquarie University Course Handbook (CourseLoop)
   x-operator: tenant
   description: >-
-    The Macquarie course handbook runs on CourseLoop as tenant siteId mq-prod-pres, served at
-    coursehandbook.mq.edu.au from a shared vendor API at api-ap-southeast-2.prod.courseloop.com.
-    The curriculum data is Macquarie's; the API and the front end are CourseLoop's and are shared
-    with its other university customers, the shared codebase still carrying UNSW-specific CSS class
-    names. Anonymous calls to the vendor API return 403, so there is no keyless surface and no
-    contract to save.
+    The Macquarie course handbook runs on CourseLoop as tenant siteId mq-prod-pres, served at coursehandbook.mq.edu.au
+    from a shared vendor API at api-ap-southeast-2.prod.courseloop.com. The curriculum data is Macquarie's;
+    the API and the front end are CourseLoop's and are shared with its other university customers, the
+    shared codebase still carrying UNSW-specific CSS class names. Anonymous calls to the vendor API return
+    403, so there is no keyless surface and no contract to save.
   humanURL: https://coursehandbook.mq.edu.au/
   tags:
   - Course Catalog
@@ -246,10 +201,10 @@ apis:
   name: Macquarie University Library MultiSearch (Ex Libris Primo)
   x-operator: tenant
   description: >-
-    Library discovery for Macquarie runs on Ex Libris Primo at multisearch.mq.edu.au. The holdings
-    are Macquarie's; Primo and the Alma platform beneath it are Ex Libris's, and the Alma/Primo
-    APIs are gated behind developer keys issued by Ex Libris to the institution rather than
-    published by it. Recorded as a tenant relationship with no contract.
+    Library discovery for Macquarie runs on Ex Libris Primo at multisearch.mq.edu.au. The holdings are
+    Macquarie's; Primo and the Alma platform beneath it are Ex Libris's, and the Alma/Primo APIs are gated
+    behind developer keys issued by Ex Libris to the institution rather than published by it. Recorded
+    as a tenant relationship with no contract.
   humanURL: https://multisearch.mq.edu.au/
   tags:
   - Library
@@ -259,6 +214,32 @@ apis:
   properties:
   - type: LibraryCatalog
     url: https://multisearch.mq.edu.au/
+- aid: macquarie:macquarie-harvesting-api
+  name: Macquarie University Harvesting API
+  description: OAI-PMH 2.0 verbs for incremental metadata harvesting.
+  humanURL: https://research-management.mq.edu.au/ws/oai?verb=Identify
+  baseURL: https://research-management.mq.edu.au/ws/oai
+  tags:
+  - harvesting
+  properties:
+  - type: OpenAPI
+    url: openapi/macquarie-harvesting-api-openapi.yml
+  - type: Examples
+    url: examples/macquarie-oai-pmh-examples.json
+  - type: Authentication
+    url: authentication/macquarie-authentication.yml
+  - type: Errors
+    url: errors/macquarie-oai-pmh-errors.yml
+  - type: Conformance
+    url: conformance/macquarie-domain-standards.yml
+  - type: Vocabulary
+    url: vocabulary/macquarie-oai-pmh-vocabulary.yml
+  - type: Rules
+    url: rules/macquarie-oai-pmh-spectral-rules.yml
+  - type: Lifecycle
+    url: lifecycle/macquarie-lifecycle.yml
+  - type: Documentation
+    url: https://www.openarchives.org/OAI/openarchivesprotocol.html
 common:
   - type: Website
     url: https://www.mq.edu.au/
