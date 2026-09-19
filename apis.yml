@@ -81,6 +81,12 @@ apis:
   - Identity Federation
   - SAML
   - Shibboleth
+  - SSO
+  - AAF
+  tags_raw:
+  - Identity Federation
+  - SAML
+  - Shibboleth
   - Single Sign-On
   - AAF
   properties:
@@ -220,6 +226,8 @@ apis:
   humanURL: https://research-management.mq.edu.au/ws/oai?verb=Identify
   baseURL: https://research-management.mq.edu.au/ws/oai
   tags:
+  - Harvesting
+  tags_raw:
   - harvesting
   properties:
   - type: OpenAPI
