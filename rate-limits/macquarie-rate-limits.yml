@@ -1,10 +1,14 @@
+# authorship: written by API Evangelist; the OAI-PMH page-size limit below was observed on
+# 2026-08-30, everything else is an explicit statement that nothing is published.
+# x-method: generated
+# x-source-url: https://research-management.mq.edu.au/ws/oai
 specification: API Commons Rate Limits
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
 provider: Macquarie University
 providerId: macquarie
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 reconciled: false
 tags:
 - Education
@@ -12,21 +16,33 @@ tags:
 - University
 - Rate Limiting
 description: >-
-  Macquarie University does not publish a unified public rate-limit table across its APIs. Open
-  metadata and harvesting endpoints (OAI-PMH, IIIF, library) may throttle large-scale
-  or automated harvesting; clients should harvest politely, honor Retry-After, and
-  contact the relevant service for bulk access.
-notes: Confirm per-service limits with each API's documentation; harvest responsibly.
+  Macquarie University publishes no rate-limit table. The one institution-operated surface, the
+  Research Portal OAI-PMH endpoint at research-management.mq.edu.au, returned no rate-limit,
+  quota or Retry-After header on any probe of 2026-08-30, and no 429 was observed. What it does
+  impose is a fixed page size of 100 records per response with a resumptionToken, which makes a
+  full publications harvest roughly 1,141 sequential requests against a completeListSize of
+  114,062 — pacing is the harvester's responsibility, not the server's.
+notes: >-
+  No published limit and none observed; the figures below are a courtesy posture, not a measured
+  or stated policy. Earlier revisions of this file named IIIF and library rate limits — neither
+  surface was found on any Macquarie host, and those claims were removed on 2026-08-30.
 sources:
 - https://raw.githubusercontent.com/api-evangelist/macquarie/refs/heads/main/apis.yml
 responseCodes:
-  throttled: 429
+  throttled: none_observed
 limits:
+- name: OAI-PMH page size
+  scope: request
+  metric: records-per-response
+  limit: 100
+  observed: '2026-08-30'
+  source: https://research-management.mq.edu.au/ws/oai?verb=ListIdentifiers&metadataPrefix=oai_dc&set=publications:all
+  notes: Fixed page size enforced by the server via resumptionToken; completeListSize 114062.
 - name: Default
   scope: client
   metric: requests-per-minute
-  limit: see service documentation
-  notes: No published global limit; large harvests may be rate-limited.
+  limit: none_published
+  notes: No published global limit and no 429 observed during this pass.
 policies:
 - name: Backoff Strategy
   description: Exponential backoff with jitter; honor Retry-After; harvest during off-peak hours.

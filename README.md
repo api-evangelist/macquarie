@@ -64,62 +64,88 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Macquarie University is a public research university in Sydney, Australia, ranked #133 in the QS World University Rankings 2025. Its public, developer-relevant API footprint centers on research-data and library infrastructure rather than a single branded developer portal. The Research Data Repository runs on Figshare for Institutions (public Figshare REST API v2 + OAI-PMH), and the University Library publishes open-source Alma tooling on GitHub. Institutional SSO is provided via a Shibboleth/SAML identity provider.
+Macquarie University is a public research university in Sydney, Australia. Its programmable footprint is small, real, and almost entirely indirect. It operates no developer portal, no open-data platform and no central API programme. The one institution-operated, keyless, machine-readable API surface found is the **Macquarie University Research Portal OAI-PMH endpoint** at `research-management.mq.edu.au`, serving 114,062 publication records and a person registry over OAI-PMH 2.0 in five metadata formats with no authentication. Alongside it Macquarie runs a Shibboleth SAML identity provider registered in the Australian Access Federation, a self-hosted Moodle (iLearn) whose web services are credential-gated, and a public Library GitHub organisation whose code consumes Ex Libris Alma rather than exposing anything.
+
+Everything else that looks like a Macquarie API is a vendor's contract running under Macquarie's name — Figshare, Elsevier Pure, CourseLoop, Ex Libris Primo. Those relationships are recorded here as tenant surfaces; the vendors' contracts are not.
 
 - APIs.json: https://raw.githubusercontent.com/api-evangelist/macquarie/refs/heads/main/apis.yml
 - Run with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=macquarie-api-evangelist&utm_content=repo
 
 ## Type
 
-- Index / Consumer / 3rd-Party
+- University / Public Research University / Index
 
 ## Tags
 
-- Education
-- Higher Education
 - University
-- Research Data
-- Library
+- Higher Education
+- Education
 - Australia
+- Research Data
+- Research Repository
+- Metadata Harvesting
+- OAI-PMH
+- Identity Federation
+- Library
+- Course Catalog
 
-## APIs
+## Surfaces
 
-- **Macquarie University Research Data Repository (Figshare API)** — Public datasets, theses, and research outputs from the Figshare-backed RDR, exposed via the public Figshare REST API v2 (DOI prefix 10.25949). Docs: https://docs.figshare.com/ · Portal: https://figshare.mq.edu.au/
-- **Macquarie University Research Data Repository (OAI-PMH)** — Standards-based metadata harvesting of RDR content via the Figshare OAI-PMH endpoint (`https://api.figshare.com/v2/oai`). Docs: https://docs.figshare.com/
-- **Macquarie University Library Open-Source Tooling** — Public Alma-integration utilities maintained by the Library on GitHub. GitHub: https://github.com/mqlibrary · Alma developer docs: https://developers.exlibrisgroup.com/alma/
+Every surface carries an operator. `x-operator: institution` means Macquarie runs the thing; `tenant` means Macquarie's data on a vendor's platform, where the contract belongs to the vendor and is deliberately not held here.
 
-## Plans
+**Institution-operated**
 
-- [plans/macquarie-plans-pricing.yml](plans/macquarie-plans-pricing.yml)
+- **Macquarie University Research Portal OAI-PMH** (`https://research-management.mq.edu.au/ws/oai`) — keyless OAI-PMH 2.0. All six verbs execute anonymously; formats `oai_dc`, `mods`, `xmetadiss`, `nl_didl`, `qdc`; `publications:all` reports `completeListSize` 114,062. Described in [openapi/macquarie-research-portal-oai-pmh-openapi.yml](openapi/macquarie-research-portal-oai-pmh-openapi.yml), **derived from live probes** on 2026-08-30 — Macquarie publishes no OpenAPI for it.
+- **Identity Provider (Shibboleth / SAML 2.0)** (`https://idp.mq.edu.au/idp/shibboleth`) — SAML metadata, registered in the Australian Access Federation as `urn:mace:federation.org.au:testfed:mq.edu.au`, asserting REFEDS R&S, the GEANT/REFEDS codes of conduct and SIRTFI.
+- **iLearn (Moodle) Web Services** (`https://ilearn.mq.edu.au/webservice/rest/server.php`) — reachable, structured `invalidtoken` error, every function credential-gated. No LTI platform endpoint answers.
+- **Library open-source tooling** (`https://github.com/mqlibrary`) — six public repos that *consume* Ex Libris Alma. None exposes an API.
 
-## Rate Limits
+**Tenant (vendor contract, not Macquarie's)**
 
-- [rate-limits/macquarie-rate-limits.yml](rate-limits/macquarie-rate-limits.yml)
+- **Research Portal (Elsevier Pure)** — `researchers.mq.edu.au` / `research-management.mq.edu.au/ws/api`. The spec at `/ws/api/openapi.json` is Elsevier's: `info.title` "Pure API", `contact` `pure-support@elsevier.com`, version 5.33.3-3, 568 paths, relative `servers: /ws/api`.
+- **Research Data Repository (Figshare)** — `figshare.mq.edu.au`, DOI prefix 10.25949 via DataCite `ARDCX.MQU`. API is Figshare's generic v2, shared with 14+ other institutions in this catalog.
+- **Course Handbook (CourseLoop)** — `coursehandbook.mq.edu.au`, tenant `siteId: mq-prod-pres` on `api-ap-southeast-2.prod.courseloop.com`. Anonymous calls return 403.
+- **Library MultiSearch (Ex Libris Primo)** — `multisearch.mq.edu.au`.
 
-## FinOps
+## Domain standards (education regime)
 
-- [finops/macquarie-finops.yml](finops/macquarie-finops.yml)
+Confirmed with a fetched location: **oai-pmh**, **shibboleth**, **saml**, **datacite**. Checked and not found: **orcid**, **crossref**, **lti**, **scim**, **oneroster**, **ed-fi**, **caliper**, **qti**. See [conformance/macquarie-domain-standards.yml](conformance/macquarie-domain-standards.yml) for the evidence behind every one of them, including the negatives.
+
+## Artifacts
+
+- [openapi/macquarie-research-portal-oai-pmh-openapi.yml](openapi/macquarie-research-portal-oai-pmh-openapi.yml) · [openapi/_original/](openapi/_original/)
+- [examples/macquarie-oai-pmh-examples.json](examples/macquarie-oai-pmh-examples.json) — verbatim captured responses
+- [authentication/macquarie-authentication.yml](authentication/macquarie-authentication.yml) · [errors/macquarie-oai-pmh-errors.yml](errors/macquarie-oai-pmh-errors.yml)
+- [conformance/macquarie-domain-standards.yml](conformance/macquarie-domain-standards.yml) · [lifecycle/macquarie-lifecycle.yml](lifecycle/macquarie-lifecycle.yml)
+- [vocabulary/macquarie-oai-pmh-vocabulary.yml](vocabulary/macquarie-oai-pmh-vocabulary.yml) · [rules/macquarie-oai-pmh-spectral-rules.yml](rules/macquarie-oai-pmh-spectral-rules.yml)
+- [plans/macquarie-plans-pricing.yml](plans/macquarie-plans-pricing.yml) · [rate-limits/macquarie-rate-limits.yml](rate-limits/macquarie-rate-limits.yml) · [finops/macquarie-finops.yml](finops/macquarie-finops.yml)
+- [security/macquarie-domain-security.yml](security/macquarie-domain-security.yml) · [review.yml](review.yml)
 
 ## Timestamps
 
 - Created: 2026-06-03
-- Modified: 2026-06-03
+- Modified: 2026-08-30
 
 ## Common Properties
 
-- Website: https://www.mq.edu.au/
-- GitHub (institution): https://github.com/macquarie-university
+- Website: https://www.mq.edu.au/ (403 to non-browser clients — bot-filtered, not dead)
 - GitHub (library): https://github.com/mqlibrary
 - LinkedIn: https://www.linkedin.com/school/macquarie-university/
-- Authentication (Shibboleth/SAML IdP): https://idp.mq.edu.au/idp/shibboleth
-- Plans: plans/macquarie-plans-pricing.yml
-- Rate Limits: rate-limits/macquarie-rate-limits.yml
-- FinOps: finops/macquarie-finops.yml
-- Review: review.yml
+- Identity federation: https://idp.mq.edu.au/idp/shibboleth · https://md.aaf.edu.au/aaf-metadata.xml
+- Research repository: https://researchers.mq.edu.au/ · https://figshare.mq.edu.au/
+- Course catalog: https://coursehandbook.mq.edu.au/
+- Library catalog: https://multisearch.mq.edu.au/
+- AI policy: https://policies.mq.edu.au/document/view.php?id=394
+- Privacy policy: https://policies.mq.edu.au/document/view.php?id=107
+- Terms (Acceptable Use of IT Resources): https://policies.mq.edu.au/document/view.php?id=234
 
 ## Notes
 
-All endpoints in this profile were probed during the 2026-06-03 review; statuses are recorded in `review.yml`. No Macquarie-branded API endpoints were fabricated. The Figshare REST API v2 and OAI-PMH endpoints were verified to return live Macquarie content. The official `macquarie-university` GitHub org exists but has no public repositories. **Macquarie Bank** is a separate financial institution with its own developer portal (developer.macquariebank.io) and is intentionally excluded from this university profile. No dedicated Macquarie University developer portal, open-data platform, or public status page was found (`developer.mq.edu.au`, `data.mq.edu.au`, `status.mq.edu.au` do not resolve).
+**Attribution correction, 2026-08-30.** This profile was rebuilt under the API Evangelist university pipeline. The 2026-06-03 profile had saved a copy of the **generic Figshare API v2 contract** under Macquarie's slug (`info.title` "Figshare API (Macquarie University Research Data Repository)", `info.contact` "Figshare Support", `servers: https://api.figshare.com/v2`); `refine-openapis` split it into ten per-tag documents, and eleven `apis[]` entries plus schemas, structures, examples, rules, a vocabulary, a JSON-LD context, scopes, an authentication profile, an agentic-access card, capability edges and twenty-one collection documents were derived from it. All 47 files and 11 entries were removed. `api.figshare.com` is claimed by fourteen other institutions in this catalog.
+
+The Figshare **relationship** was not deleted. `figshare.mq.edu.au` holds Macquarie's data under Macquarie's DOI prefix and survives as a tenant surface. Only the contract and its derivatives went.
+
+No Macquarie-branded endpoint has been fabricated. Hosts that do not resolve: `api.mq.edu.au`, `developer.mq.edu.au`, `data.mq.edu.au`, `timetable.mq.edu.au`, `status.mq.edu.au`, `lib.mq.edu.au`. **Macquarie Bank** is a separate financial institution with its own developer portal (developer.macquariebank.io) and is intentionally excluded from this university profile.
 
 ## Maintainers
 

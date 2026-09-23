@@ -1,0 +1,43 @@
+# authorship: derived by API Evangelist from live, unauthenticated probes of the endpoint
+# on 2026-08-30. Macquarie University publishes no such document; this is OURS, not theirs.
+# x-method: derived
+# x-source-url: https://research-management.mq.edu.au/ws/oai
+generated: '2026-08-30'
+method: probed
+source: https://research-management.mq.edu.au/ws/oai
+x-operator: institution
+provider: Macquarie University
+description: >-
+  Lifecycle facts for the one institution-operated API surface in this repo. Everything here was
+  read off a live response; nothing is inferred from a changelog, because Macquarie publishes none
+  for this endpoint.
+surface: Macquarie University Research Portal OAI-PMH
+versioning:
+  scheme: protocol-version
+  value: '2.0'
+  evidence: Identify -> protocolVersion
+  note: >-
+    OAI-PMH pins the contract at the protocol level; there is no institution-assigned API version,
+    no version in the path, and no version header. A consumer's compatibility guarantee is the
+    OpenArchives 2.0 specification, not anything Macquarie publishes.
+history:
+  earliest_record_datestamp: '2017-01-17T07:56:49Z'
+  evidence: Identify -> earliestDatestamp
+  note: Marks when the research-information system behind the endpoint went live. Records themselves describe outputs back to 1956 by publication year.
+deprecation:
+  policy_published: false
+  sunset_header: false
+  note: No Deprecation or Sunset header observed; no deprecation policy published for this endpoint.
+change_communication:
+  changelog: none_found
+  status_page: none_found
+  note: >-
+    status.mq.edu.au does not resolve. There is no changelog, RSS or status feed for this endpoint;
+    a harvester learns about a change by observing one.
+harvesting_caveats:
+- deletedRecord policy is `no` — deletions are not reported, so an incremental harvest cannot
+  detect a withdrawn record. A periodic full re-harvest is the only correct strategy.
+- Page size is fixed at 100 with a resumptionToken; at completeListSize 114,062 a full
+  publications harvest is ~1,141 requests.
+- The Identify rights manifest permits metadata harvesting but forbids harvesting full-text
+  documents and reproduction for commercial purposes.

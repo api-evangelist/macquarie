@@ -1,0 +1,133 @@
+# authorship: derived by API Evangelist from live probes of Macquarie hosts plus the
+# Australian Access Federation metadata aggregate and the DataCite REST API, 2026-08-30.
+# Macquarie University publishes no conformance statement; this is OURS, not theirs.
+# x-method: derived
+# x-source-url: https://research-management.mq.edu.au/ws/oai
+generated: '2026-08-30'
+method: probed
+source: >-
+  Live probes of Macquarie University hosts plus the Australian Access Federation metadata
+  aggregate and the DataCite REST API, 2026-08-30.
+provider: Macquarie University
+providerId: macquarie
+regime: education
+description: >-
+  Domain-standard conformance for Macquarie University, measured against the Kin Score `education`
+  regime standards list (scim, lti, oneroster, ed-fi, caliper, qti, oai-pmh, shibboleth, saml,
+  orcid, datacite, crossref). REWARD-ONLY: only standards with a location that was actually fetched
+  are recorded as conformant. Eight of the twelve are recorded as not_found, with what was checked,
+  because an unrecorded standard and an absent one are different facts.
+conformant:
+- standard: oai-pmh
+  name: Open Archives Initiative Protocol for Metadata Harvesting 2.0
+  x-operator: institution
+  location: https://research-management.mq.edu.au/ws/oai
+  evidence:
+  - url: https://research-management.mq.edu.au/ws/oai?verb=Identify
+    status: 200
+    detail: >-
+      protocolVersion 2.0; repositoryName "Macquarie University Research Portal"; adminEmail
+      rms.support@mq.edu.au; earliestDatestamp 2017-01-17T07:56:49Z; granularity
+      YYYY-MM-DDThh:mm:ssZ; deletedRecord no.
+  - url: https://research-management.mq.edu.au/ws/oai?verb=ListMetadataFormats
+    status: 200
+    detail: 'metadataPrefix: oai_dc, mods, xmetadiss, nl_didl, qdc'
+  - url: https://research-management.mq.edu.au/ws/oai?verb=ListIdentifiers&metadataPrefix=oai_dc&set=publications:all
+    status: 200
+    detail: completeListSize 114062; 100 headers per page; resumptionToken paging confirmed
+  contract: openapi/macquarie-research-portal-oai-pmh-openapi.yml
+  contract_location: servers[0].url and x-standards[0]
+- standard: shibboleth
+  name: Shibboleth Identity Provider (SAML metadata profile)
+  x-operator: institution
+  location: https://idp.mq.edu.au/idp/shibboleth
+  evidence:
+  - url: https://idp.mq.edu.au/idp/shibboleth
+    status: 200
+    detail: >-
+      Shibboleth IdP metadata, 4,380 bytes, declaring xmlns:shibmd
+      "urn:mace:shibboleth:metadata:1.0" and <shibmd:Scope regexp="false">mq.edu.au</shibmd:Scope>.
+  - url: https://md.aaf.edu.au/aaf-metadata.xml
+    status: 200
+    detail: >-
+      Australian Access Federation aggregate carries entityID
+      urn:mace:federation.org.au:testfed:mq.edu.au, DisplayName "Macquarie University",
+      Description "Macquarie University IdP", signing cert CN=idp.mq.edu.au, registered
+      2018-08-24.
+- standard: saml
+  name: SAML 2.0 Web Browser SSO
+  x-operator: institution
+  location: https://idp.mq.edu.au/idp/profile/SAML2/Redirect/SSO
+  evidence:
+  - url: https://idp.mq.edu.au/idp/shibboleth
+    status: 200
+    detail: >-
+      IDPSSODescriptor protocolSupportEnumeration urn:oasis:names:tc:SAML:2.0:protocol with three
+      SingleSignOnService bindings (HTTP-Redirect, HTTP-POST, HTTP-POST-SimpleSign).
+  - url: https://md.aaf.edu.au/aaf-metadata.xml
+    status: 200
+    detail: >-
+      Entity attributes assert REFEDS Research & Scholarship, REFEDS Anonymous / Pseudonymous /
+      Personalized, GEANT Data Protection Code of Conduct v1, REFEDS Code of Conduct v2, and
+      SIRTFI assurance certification. Three Macquarie-operated SAML SPs are also registered:
+      https://ilearn.mq.edu.au/auth/saml, https://ilearn-stage.mq.edu.au/auth/saml and
+      https://limesurvey.mq.edu.au/simplesaml/module.php/saml/sp/metadata.php/default-sp.
+- standard: datacite
+  name: DataCite DOI registration
+  x-operator: institution
+  location: https://api.datacite.org/providers/mqu
+  evidence:
+  - url: https://api.datacite.org/prefixes/10.25949
+    status: 200
+    detail: Prefix 10.25949 mapped to provider `mqu` and repository client `ardcx.mqu`.
+  - url: https://api.datacite.org/providers?query=macquarie
+    status: 200
+    detail: 'provider id mqu, name "Macquarie University", memberType consortium_organization (via ARDC).'
+  - url: https://api.datacite.org/clients/ardcx.mqu
+    status: 200
+    detail: >-
+      Repository client ARDCX.MQU, name "Macquarie University", clientType repository, isActive
+      true, domains mq.edu.au,*.mq.edu.au,figshare.com,mq.figshare.com, created 2020-05-14.
+not_found:
+- standard: orcid
+  checked:
+  - url: https://research-management.mq.edu.au/ws/oai?verb=ListRecords&metadataPrefix=oai_dc&set=persons:all
+    status: 200
+    detail: 94KB of person records returned; no ORCID identifier present in any of them.
+  - url: https://research-management.mq.edu.au/ws/oai?verb=ListRecords&metadataPrefix=mods&set=persons:all
+    status: 200
+    detail: No ORCID identifier present.
+  note: >-
+    7,631 ORCID records name Macquarie University as an affiliation, but that is researchers'
+    own data on ORCID's servers, not a Macquarie-operated surface, and it is not claimed here.
+- standard: crossref
+  checked:
+  - url: https://api.crossref.org/members?query=Macquarie
+    status: 200
+    detail: total-results 0 — Macquarie University is not a Crossref member. DOIs are minted through DataCite via ARDC instead.
+- standard: lti
+  checked:
+  - url: https://ilearn.mq.edu.au/enrol/lti/token.php
+    status: 404
+  - url: https://ilearn.mq.edu.au/mod/lti/certs/keyset.php
+    status: 404
+  - url: https://ilearn.mq.edu.au/.well-known/openid-configuration
+    status: 404
+  note: >-
+    Macquarie runs its own Moodle (iLearn) and Moodle ships LTI 1.3 support, but no LTI platform
+    endpoint answers publicly on this deployment, so no conformance is claimed.
+- standard: scim
+  checked: []
+  note: No public SCIM endpoint found on any mq.edu.au host probed.
+- standard: oneroster
+  checked: []
+  note: No public OneRoster endpoint found.
+- standard: ed-fi
+  checked: []
+  note: Ed-Fi is a US K-12/state-agency standard; not applicable to an Australian university and not found.
+- standard: caliper
+  checked: []
+  note: No public Caliper event store or endpoint found on the iLearn deployment.
+- standard: qti
+  checked: []
+  note: No public QTI surface found.

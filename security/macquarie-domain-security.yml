@@ -1,23 +1,25 @@
-generated: '2026-07-11'
+# authorship: written by API Evangelist from live DNS/TLS/HTTP probes of this repo's hosts.
+# x-method: derived
+generated: '2026-08-30'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
 - host: www.mq.edu.au
   https: true
   tls_version: TLSv1.3
-  cert_expires: Sep 20 03:48:34 2026 GMT
+  cert_expires: Nov 18 11:52:37 2026 GMT
   hsts: null
-- host: figshare.mq.edu.au
+- host: research-management.mq.edu.au
   https: true
   tls_version: TLSv1.3
-  cert_expires: Jan 23 23:59:59 2027 GMT
-  hsts: false
-- host: api.figshare.com
-  https: true
-  tls_version: TLSv1.2
-  cert_expires: Dec 25 23:59:59 2026 GMT
+  cert_expires: Oct  6 06:59:38 2026 GMT
   hsts: true
-  hsts_max_age: 31536000
+  hsts_max_age: 2592000
+- host: idp.mq.edu.au
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Jan  6 23:59:59 2027 GMT
+  hsts: null
 domains:
 - domain: mq.edu.au
   dnssec: false
@@ -25,15 +27,3 @@ domains:
   spf: true
   dmarc: true
   dmarc_policy: none
-- domain: figshare.com
-  dnssec: false
-  caa:
-  - 0 issue "harica.gr"
-  - 0 issue "letsencrypt.org"
-  - 0 issue "pki.goog; cansignhttpexchanges=yes"
-  - 0 issue "sectigo.com"
-  - 0 issue "ssl.com"
-  - 0 issuewild "amazon.com"
-  spf: true
-  dmarc: true
-  dmarc_policy: reject

@@ -1,0 +1,60 @@
+# authorship: derived by API Evangelist from live, unauthenticated probes of the endpoint
+# on 2026-08-30. Macquarie University publishes no such document; this is OURS, not theirs.
+# x-method: derived
+# x-source-url: https://research-management.mq.edu.au/ws/oai
+generated: '2026-08-30'
+method: probed
+source: https://research-management.mq.edu.au/ws/oai
+x-operator: institution
+vocabulary:
+  name: Macquarie University Research Portal OAI-PMH Vocabulary
+  version: 1.0.0
+  description: >-
+    The terms this endpoint actually uses, read off live responses on 2026-08-30. Protocol terms
+    are OAI-PMH 2.0's; the metadata prefixes, set specs and identifier form are Macquarie's own
+    deployment values and were observed, not assumed.
+  terms:
+  - term: verb
+    definition: >-
+      The single dispatch parameter of an OAI-PMH request. All six verbs were executed successfully
+      against this endpoint - Identify, ListMetadataFormats, ListSets, ListIdentifiers, ListRecords
+      and GetRecord.
+    tags: [protocol, oai-pmh]
+  - term: metadataPrefix
+    definition: The metadata format to disseminate. This repository supports exactly five, confirmed by ListMetadataFormats.
+    values: [oai_dc, mods, xmetadiss, nl_didl, qdc]
+    tags: [protocol, metadata]
+  - term: setSpec
+    definition: >-
+      The set a record belongs to. Macquarie's hierarchy has two roots — persons and publications —
+      with a withFiles variant and one set per publication year running from 1956 to the present.
+    values_observed: [persons:all, publications:all, publications:withFiles, 'publications:year<YYYY>', 'publications:year<YYYY>:withFiles']
+    tags: [deployment, macquarie]
+  - term: OAI identifier
+    definition: >-
+      Record identifier form used by this deployment: `oai:https://researchers.mq.edu.au:<entity>/<uuid>`,
+      where entity is `publications` or `persons` and the UUID resolves on the public Pure portal at
+      researchers.mq.edu.au.
+    example: oai:https://researchers.mq.edu.au:publications/27e04565-090c-4ccf-a8a8-33d1cb81728d
+    tags: [deployment, identifier, macquarie]
+  - term: resumptionToken
+    definition: >-
+      Continuation token for an incomplete list, carrying `cursor` and `completeListSize`
+      attributes. Page size observed at 100.
+    example: oai_dc/114062/546934624/100/0/5741702/publications:all/x/x
+    tags: [protocol, paging]
+  - term: completeListSize
+    definition: Total records matching a listing request. Observed at 114,062 for publications:all on 2026-08-30.
+    tags: [protocol, paging, macquarie]
+  - term: earliestDatestamp
+    definition: Oldest record datestamp the repository will report. 2017-01-17T07:56:49Z — the deployment date of the Pure system behind this endpoint, not the age of the research it describes (records reach back to 1956 by publication year).
+    tags: [protocol, lifecycle, macquarie]
+  - term: deletedRecord
+    definition: Deletion policy. `no` — this repository does not report deletions, so a harvester cannot learn that a record went away from an incremental harvest alone.
+    tags: [protocol, harvesting, caveat]
+  - term: rightsManifest
+    definition: >-
+      Macquarie-authored rights statement returned inside Identify. Metadata may be harvested to
+      enable discovery; harvesting of full-text documents is NOT permitted; reproduction for
+      commercial purposes is not permitted.
+    tags: [rights, macquarie, governance]

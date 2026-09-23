@@ -1,0 +1,185 @@
+# x-archived-from: macquarie-research-portal-oai-pmh-openapi.yml
+# x-archived-on: 2026-09-16
+# authorship: derived by API Evangelist from live, unauthenticated probes of the endpoint
+# on 2026-08-30. Macquarie University publishes no such document; this is OURS, not theirs.
+# x-method: derived
+# x-source-url: https://research-management.mq.edu.au/ws/oai
+openapi: 3.1.0
+info:
+  title: Macquarie University Research Portal OAI-PMH
+  summary: Institution-operated OAI-PMH 2.0 metadata harvesting interface for the Macquarie University Research Portal.
+  description: |-
+    Keyless, public OAI-PMH 2.0 harvesting interface operated by Macquarie University at
+    `research-management.mq.edu.au`, on the university's own registrable domain.
+
+    The repository identifies itself as **Macquarie University Research Portal**, with
+    `adminEmail: rms.support@mq.edu.au` and a Macquarie-authored rights manifest — see the
+    `?verb=Identify` response. The underlying research-information system is Elsevier Pure, but
+    THIS interface is the OpenArchives OAI-PMH 2.0 protocol served from the institution's own host
+    under the institution's own identity, which is the operator distinction this description turns
+    on. Elsevier's own product API (`/ws/api`, `info.title: "Pure API"`,
+    `contact: pure-support@elsevier.com`, 568 paths, api-key gated) is a DIFFERENT surface, is the
+    vendor's contract, and is deliberately NOT described here.
+
+    PROVENANCE: Macquarie University publishes no OpenAPI description of this endpoint. This
+    document was DERIVED from live, unauthenticated probes of the endpoint on 2026-08-30 — every
+    operation, parameter, metadata prefix, set and error code below was observed in an actual
+    response. Nothing is inferred from documentation or from another institution's deployment.
+
+    Observed at probe time: 5 metadata formats (oai_dc, mods, xmetadiss, nl_didl, qdc); sets for
+    `persons:all`, `publications:all`, `publications:withFiles` and per-year variants from 1956;
+    `completeListSize` of 114,062 for `publications:all`; page size 100 with a `resumptionToken`;
+    `earliestDatestamp` 2017-01-17T07:56:49Z; `deletedRecord` policy `no`; granularity
+    `YYYY-MM-DDThh:mm:ssZ`.
+
+    OAI-PMH returns HTTP 200 for protocol-level errors and signals the condition in an
+    `<error code="...">` element — all four error codes documented below were provoked and observed.
+  version: '2.0'
+  contact:
+    name: Macquarie University Research Management Support
+    email: rms.support@mq.edu.au
+    url: https://research-management.mq.edu.au/ws/oai?verb=Identify
+  license:
+    name: Macquarie University metadata rights manifest (harvesting of metadata permitted; harvesting of full-text documents is not)
+    url: https://research-management.mq.edu.au/ws/oai?verb=Identify
+  x-provenance:
+    generated: '2026-08-30'
+    method: probed
+    source: https://research-management.mq.edu.au/ws/oai
+    note: >-
+      Derived from live keyless probes of the endpoint. No vendor document was copied, adapted or
+      re-titled to produce this description.
+  x-operator: institution
+servers:
+- url: https://research-management.mq.edu.au/ws/oai
+  description: Macquarie University Research Portal OAI-PMH base URL (keyless, HTTPS, HSTS)
+tags:
+- name: harvesting
+  description: OAI-PMH 2.0 verbs for incremental metadata harvesting.
+- name: discovery
+  description: OAI-PMH 2.0 verbs describing the repository and what it can disseminate.
+paths:
+  /:
+    get:
+      tags:
+      - harvesting
+      summary: OAI-PMH request
+      description: |-
+        Every OAI-PMH request is a GET against the single base URL, dispatched by the `verb`
+        parameter. Which of the other parameters are legal depends on the verb; the six verbs are
+        described in `x-verbs` below and each was executed against this endpoint.
+      operationId: oaiPmhRequest
+      parameters:
+      - name: verb
+        in: query
+        required: true
+        description: The OAI-PMH verb to execute.
+        schema:
+          type: string
+          enum:
+          - Identify
+          - ListMetadataFormats
+          - ListSets
+          - ListIdentifiers
+          - ListRecords
+          - GetRecord
+      - name: metadataPrefix
+        in: query
+        required: false
+        description: >-
+          Metadata format to disseminate. Required for ListIdentifiers, ListRecords and GetRecord.
+          Observed supported values on this repository.
+        schema:
+          type: string
+          enum: [oai_dc, mods, xmetadiss, nl_didl, qdc]
+      - name: identifier
+        in: query
+        required: false
+        description: >-
+          OAI identifier of a single record. Required for GetRecord. Observed form:
+          `oai:https://researchers.mq.edu.au:publications/<uuid>` and
+          `oai:https://researchers.mq.edu.au:persons/<uuid>`.
+        schema:
+          type: string
+          examples:
+          - oai:https://researchers.mq.edu.au:publications/27e04565-090c-4ccf-a8a8-33d1cb81728d
+      - name: set
+        in: query
+        required: false
+        description: setSpec to restrict a listing to. Observed values include `persons:all`, `publications:all`, `publications:withFiles`, `publications:year2025`.
+        schema:
+          type: string
+      - name: from
+        in: query
+        required: false
+        description: Lower bound on record datestamp, UTC, granularity YYYY-MM-DDThh:mm:ssZ.
+        schema:
+          type: string
+          format: date-time
+      - name: until
+        in: query
+        required: false
+        description: Upper bound on record datestamp, UTC, granularity YYYY-MM-DDThh:mm:ssZ.
+        schema:
+          type: string
+          format: date-time
+      - name: resumptionToken
+        in: query
+        required: false
+        description: >-
+          Continuation token returned with an incomplete list. Exclusive of every other parameter
+          except `verb`. Observed page size 100; the token carries cursor and completeListSize.
+        schema:
+          type: string
+          examples:
+          - oai_dc/114062/546934624/100/0/5741702/publications:all/x/x
+      responses:
+        '200':
+          description: >-
+            An OAI-PMH response envelope. Protocol errors are ALSO returned with HTTP 200 and are
+            signalled by an `<error code="...">` element inside the envelope, per OAI-PMH 2.0.
+          content:
+            application/xml:
+              schema:
+                type: string
+                description: OAI-PMH 2.0 XML envelope validating against http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd
+      x-verbs:
+      - verb: Identify
+        description: Repository name, base URL, protocol version, admin email, earliest datestamp, deleted-record policy, granularity and the Macquarie rights manifest.
+        observed: '200 application/xml'
+      - verb: ListMetadataFormats
+        description: The metadata formats this repository can disseminate.
+        observed: '200; oai_dc, mods, xmetadiss, nl_didl, qdc'
+      - verb: ListSets
+        description: The setSpec hierarchy — persons, publications, publications with files, and one set per publication year from 1956.
+        observed: '200'
+      - verb: ListIdentifiers
+        description: Record headers only, paged with a resumptionToken.
+        observed: '200; completeListSize 114062 for publications:all, 100 headers per page'
+      - verb: ListRecords
+        description: Full records, paged with a resumptionToken.
+        observed: '200'
+      - verb: GetRecord
+        description: A single record by OAI identifier and metadata prefix.
+        observed: '200; 3,710-byte oai_dc record'
+x-standards:
+- id: oai-pmh
+  name: Open Archives Initiative Protocol for Metadata Harvesting 2.0
+  spec: https://www.openarchives.org/OAI/openarchivesprotocol.html
+  evidence: servers[0].url + Identify response protocolVersion 2.0
+- id: dublin-core
+  name: Dublin Core Metadata Element Set (oai_dc)
+  evidence: ListMetadataFormats -> metadataPrefix oai_dc
+x-errors:
+- code: badVerb
+  http: 200
+  message: Value of the verb argument is not a legal OAI-PMH verb, the verb argument is missing, or the verb argument is repeated.
+- code: cannotDisseminateFormat
+  http: 200
+  message: The value of the metadataPrefix argument is not supported by the repository.
+- code: idDoesNotExist
+  http: 200
+  message: The value of the identifier argument is unknown or illegal in this repository.
+- code: noRecordsMatch
+  http: 200
+  message: The combination of the values of the from, until, and set arguments results in an empty list.

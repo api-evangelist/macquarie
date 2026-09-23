@@ -1,0 +1,46 @@
+# authorship: derived by API Evangelist from live, unauthenticated probes of the endpoint
+# on 2026-08-30. Macquarie University publishes no such document; this is OURS, not theirs.
+# x-method: derived
+# x-source-url: https://research-management.mq.edu.au/ws/oai
+generated: '2026-08-30'
+method: probed
+source: https://research-management.mq.edu.au/ws/oai
+x-operator: institution
+description: >-
+  Error behaviour of the Macquarie University Research Portal OAI-PMH endpoint, established by
+  provoking each condition against the live endpoint on 2026-08-30. OAI-PMH 2.0 returns HTTP 200
+  for protocol-level errors and carries the condition in an <error code="..."> element inside the
+  response envelope — an agent that reads only the status code will read every one of these as
+  success.
+transport:
+  protocol_errors_use_http_status: false
+  protocol_error_status: 200
+  error_element: /OAI-PMH/error[@code]
+errors:
+- code: badVerb
+  http_status: 200
+  message: Value of the verb argument is not a legal OAI-PMH verb, the verb argument is missing, or the verb argument is repeated.
+  provoked_with: '?verb=Bogus'
+  observed: '2026-08-30'
+- code: cannotDisseminateFormat
+  http_status: 200
+  message: The value of the metadataPrefix argument is not supported by the repository.
+  provoked_with: '?verb=ListRecords&metadataPrefix=nope'
+  observed: '2026-08-30'
+- code: idDoesNotExist
+  http_status: 200
+  message: The value of the identifier argument is unknown or illegal in this repository.
+  provoked_with: '?verb=GetRecord&metadataPrefix=oai_dc&identifier=oai:bogus'
+  observed: '2026-08-30'
+- code: noRecordsMatch
+  http_status: 200
+  message: The combination of the values of the from, until, and set arguments results in an empty list.
+  provoked_with: '?verb=ListRecords&metadataPrefix=oai_dc&from=1900-01-01T00:00:00Z&until=1900-01-02T00:00:00Z'
+  observed: '2026-08-30'
+not_observed:
+- code: badArgument
+  note: Defined by OAI-PMH 2.0; not provoked during this pass. Not claimed.
+- code: badResumptionToken
+  note: Defined by OAI-PMH 2.0; not provoked during this pass. Not claimed.
+- code: noSetHierarchy
+  note: Not applicable — this repository supports sets (ListSets returns a hierarchy).

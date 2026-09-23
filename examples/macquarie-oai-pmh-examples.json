@@ -1,0 +1,83 @@
+{
+  "generated": "2026-08-30",
+  "method": "probed",
+  "source": "https://research-management.mq.edu.au/ws/oai",
+  "x-operator": "institution",
+  "note": "Verbatim responses captured from live, unauthenticated GET requests against the Macquarie University Research Portal OAI-PMH endpoint on 2026-08-30. Bodies are truncated only where noted; nothing was synthesised.",
+  "examples": [
+    {
+      "name": "Identify the repository",
+      "request": {
+        "method": "GET",
+        "url": "https://research-management.mq.edu.au/ws/oai?verb=Identify",
+        "headers": {
+          "Accept": "application/xml"
+        },
+        "auth": "none"
+      },
+      "response": {
+        "status": 200,
+        "content_type": "application/xml",
+        "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n<OAI-PMH xmlns=\"http://www.openarchives.org/OAI/2.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd\">\n  <responseDate>2026-08-31T05:23:57Z</responseDate>\n  <request verb=\"Identify\">https://research-management.mq.edu.au/ws/oai</request>\n  <Identify>\n    <repositoryName>Macquarie University Research Portal</repositoryName>\n    <baseURL>https://research-management.mq.edu.au/ws/oai</baseURL>\n    <protocolVersion>2.0</protocolVersion>\n    <adminEmail>rms.support@mq.edu.au</adminEmail>\n    <earliestDatestamp>2017-01-17T07:56:49Z</earliestDatestamp>\n    <deletedRecord>no</deletedRecord>\n    <granularity>YYYY-MM-DDThh:mm:ssZ</granularity>\n    <description>\n      <rightsManifest xmlns=\"http://www.openarchives.org/OAI/2.0/rights/\" appliesTo=\"http://www.openarchives.org/OAI/2.0/entity#metadata\" xsi:schemaLocation=\"http://www.openarchives.org/OAI/2.0/rights/ http://www.openarchives.org/OAI/2.0/rightsManifest.xsd\">\n        <rights>\n          <rightsDefinition>\n            <oai_dc:dc xmlns:oai_dc=\"http://www.openarchives.org/OAI/2.0/oai_dc/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xsi:schemaLocation=\"http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd\">\n              <dc:title>Macquarie University Research Portal</dc:title>\n              <dc:date>2019-09-13</dc:date>\n              <dc:creator>Macquarie University</dc:creator>\n              <dc:description>The copyright of any material deposited in Macquarie University Research Portal is retained by the creator(s) or their recognised agent. The text may not be reproduced or communicated in print or electronic form for commercial purposes. Specific conditions on individual items should be adhered to. Readers may copy, download, print and save electronic copies of items for their own individual, non-commercial use. Excerpts, quotations, and paraphrasing from material stored within Macquarie University Research Portal must be fully referenced. Macquarie University reserves the right to remove content at any time. This will normally be done in consultation with the submitter of the content. Metadata may be harvested to enable the discovery of the archived contents. Harvesting of full-text documents is not permitted. Macquarie University Research Portal makes every effort to comply with relevant copyright, licence and contract conditions, including the provisions of the Australian Copyright Act 1968 and subsequent amendments.</dc:description>\n              <dc:identifier>© Macquarie University, CRICOS Provider 00002J, ABN 90 952 801 237</dc:identifier>\n            </oai_dc:dc>\n          </rightsDefinition>\n        </rights>\n      </rightsManifest>\n    </description>\n    <description>\n      <oai-identifier xmlns=\"http://www.openarchives.org/OAI/2.0/oai-identifier\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.openarchives.org/OAI/2.0/oai-identifier http://www.openarchives.org/OAI/2.0/oai-identifier.xsd\">\n        <scheme>OAI-PMH</scheme>\n        <repositoryIdentifier>Macquarie University Research Portal</repositoryIdentifier>\n        <delimiter>:</delimiter>\n        <sampleIdentifier>Publications</sampleIdentifier>\n      </oai-identifier>\n    </description>\n  </Identify>\n</OAI-PMH>"
+      }
+    },
+    {
+      "name": "List the metadata formats the repository can disseminate",
+      "request": {
+        "method": "GET",
+        "url": "https://research-management.mq.edu.au/ws/oai?verb=ListMetadataFormats",
+        "auth": "none"
+      },
+      "response": {
+        "status": 200,
+        "content_type": "application/xml",
+        "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n<OAI-PMH xmlns=\"http://www.openarchives.org/OAI/2.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd\">\n  <responseDate>2026-08-31T05:23:57Z</responseDate>\n  <request verb=\"ListMetadataFormats\">https://research-management.mq.edu.au/ws/oai</request>\n  <ListMetadataFormats>\n    <metadataFormat>\n      <metadataPrefix>oai_dc</metadataPrefix>\n      <schema>http://www.openarchives.org/OAI/2.0/oai_dc.xsd</schema>\n      <metadataNamespace>http://www.openarchives.org/OAI/2.0/oai_dc/</metadataNamespace>\n    </metadataFormat>\n    <metadataFormat>\n      <metadataPrefix>mods</metadataPrefix>\n      <schema>http://www.loc.gov/mods/v3/mods-3-8.xsd</schema>\n      <metadataNamespace>http://www.loc.gov/mods/v3</metadataNamespace>\n    </metadataFormat>\n    <metadataFormat>\n      <metadataPrefix>xmetadiss</metadataPrefix>\n      <schema>http://files.dnb.de/standards/xmetadiss/xmetadiss.xsd</schema>\n      <metadataNamespace>http://www.d-nb.de/standards/xmetadissplus/</metadataNamespace>\n    </metadataFormat>\n    <metadataFormat>\n      <metadataPrefix>nl_didl</metadataPrefix>\n      <schema>http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/did/didl.xsd</schema>\n      <metadataNamespace>urn:mpeg:mpeg21:2002:02-DIDL-NS</metadataNamespace>\n    </metadataFormat>\n    <metadataFormat>\n      <metadataPrefix>qdc</metadataPrefix>\n      <schema>http://www.openarchives.org/OAI/2.0/oai_dc.xsd</schema>\n      <metadataNamespace>http://www.openarchives.org/OAI/2.0/oai_dc/</metadataNamespace>\n    </metadataFormat>\n  </ListMetadataFormats>\n</OAI-PMH>"
+      }
+    },
+    {
+      "name": "Get one publication record in oai_dc",
+      "request": {
+        "method": "GET",
+        "url": "https://research-management.mq.edu.au/ws/oai?verb=GetRecord&metadataPrefix=oai_dc&identifier=oai:https://researchers.mq.edu.au:publications/27e04565-090c-4ccf-a8a8-33d1cb81728d",
+        "auth": "none"
+      },
+      "response": {
+        "status": 200,
+        "content_type": "application/xml",
+        "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n<OAI-PMH xmlns=\"http://www.openarchives.org/OAI/2.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd\">\n  <responseDate>2026-08-31T05:23:58Z</responseDate>\n  <request identifier=\"oai:https://researchers.mq.edu.au:publications/27e04565-090c-4ccf-a8a8-33d1cb81728d\" metadataPrefix=\"oai_dc\" verb=\"GetRecord\">https://research-management.mq.edu.au/ws/oai</request>\n  <GetRecord>\n    <record>\n      <header>\n        <identifier>oai:https://researchers.mq.edu.au:publications/27e04565-090c-4ccf-a8a8-33d1cb81728d</identifier>\n        <datestamp>2026-03-08T21:36:46Z</datestamp>\n        <setSpec>publications:all</setSpec>\n        <setSpec>publications:year2000</setSpec>\n      </header>\n      <metadata>\n        <oai_dc:dc xmlns:dct=\"http://purl.org/dc/terms/\" xmlns:oai_dc=\"http://www.openarchives.org/OAI/2.0/oai_dc/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd\">\n          <dc:title xml:lang=\"eng\">Symmetry-breaking rotational energy transfer in acetylene molecules, induced by collisional and/or infrared fields</dc:title>\n          <dc:creator>Orr, Brian J.</dc:creator>\n          <dc:creator>Frost, Michael J.</dc:creator>\n          <dc:creator>Payne, Mark A.</dc:creator>\n          <dc:creator>Milce, Angela P.</dc:creator>\n          <dc:description xml:lang=\"eng\">&lt;p&gt;Time-resolved, fluorescence-detected infrared-ultraviolet double resonance (IR-UV DR) techniques were used to investigate the spectroscopic and dynamical behavior of acetylene molecules in two rovibrational manifolds: v &lt;sub&gt;CC&lt;/sub&gt;+3v &lt;sub&gt;CH&lt;/sub&gt; at approximately 11 600 cm &lt;sup&gt;-1&lt;/sup&gt; and 4v &lt;sub&gt;CH&lt;/sub&gt; at approximately 12 700 cm &lt;sup&gt;-1&lt;/sup&gt;. The high symmetry and structural simplicity of the C &lt;sub&gt;2&lt;/sub&gt;H &lt;sub&gt;2&lt;/sub&gt; molecule suggest that its behavior at these chemically insignificant levels of excitation should be regular and predictable. However, the IR-UV DR spectroscopic experiments in these regions reveal numerous puzzling anomalies.&lt;/p&gt;</dc:description>\n          <dc:date>2000</dc:date>\n          <dc:type>contributionToPeriodical</dc:type>\n          <dc:identifier>https://researchers.mq.edu.au/en/publications/27e04565-090c-4ccf-a8a8-33d1cb81728d</dc:identifier>\n          <dc:identifier type=\"doi\">https://doi.org/10.1109/IQEC.2000.907916</dc:identifier>\n          <dc:identifier type=\"/dk/atira/pure/links/researchoutput/scopuspublication\">https://www.scopus.com/pages/publications/0033716968</dc:identifier>\n          <dc:identifier>urn:ISBN:0780363183</dc:identifier>\n          <dc:relation>info:eu-repo/semantics/altIdentifier/doi/10.1109/IQEC.2000.907916</dc:relation>\n          <dc:relation>info:eu-repo/semantics/altIdentifier/isbn/0780363183</dc:relation>\n          <dc:source>Orr, B J, Frost, M J, Payne, M A &amp; Milce, A P 2000, Symmetry-breaking rotational energy transfer in acetylene molecules, induced by collisional and/or infrared fields. in IQEC, International Quantum Electronics Conference Proceedings. Nice, France, pp. 96, 2000 International Quantum Electronics Conference (IQEC 2000), Nice, France, 10/09/00. https://doi.org/10.1109/IQEC.2000.907916</dc:source>\n          <dc:language xsi:type=\"dct:ISO639-2\">eng</dc:language>\n          <dc:rights>info:eu-repo/semantics/closedAccess</dc:rights>\n        </oai_dc:dc>\n      </metadata>\n    </record>\n  </GetRecord>\n</OAI-PMH>"
+      }
+    },
+    {
+      "name": "Page through publication identifiers with a resumptionToken",
+      "request": {
+        "method": "GET",
+        "url": "https://research-management.mq.edu.au/ws/oai?verb=ListIdentifiers&metadataPrefix=oai_dc&set=publications:all",
+        "auth": "none"
+      },
+      "response": {
+        "status": 200,
+        "content_type": "application/xml",
+        "observed": {
+          "headers_returned_per_page": 100,
+          "completeListSize": 114062,
+          "resumptionToken": "oai_dc/114062/546934624/100/0/5741702/publications:all/x/x"
+        },
+        "body_excerpt": "<ListIdentifiers>\n  <header>\n    <identifier>oai:https://researchers.mq.edu.au:publications/27e04565-090c-4ccf-a8a8-33d1cb81728d</identifier>\n    <datestamp>2026-03-08T21:36:46Z</datestamp>\n    <setSpec>publications:all</setSpec>\n  </header>\n  ... 99 more headers ...\n  <resumptionToken cursor=\"0\" completeListSize=\"114062\">oai_dc/114062/546934624/100/0/5741702/publications:all/x/x</resumptionToken>\n</ListIdentifiers>",
+        "note": "Full page omitted for size; the resumptionToken and completeListSize are verbatim."
+      }
+    },
+    {
+      "name": "Protocol error: unsupported metadata prefix (HTTP is still 200)",
+      "request": {
+        "method": "GET",
+        "url": "https://research-management.mq.edu.au/ws/oai?verb=ListRecords&metadataPrefix=nope",
+        "auth": "none"
+      },
+      "response": {
+        "status": 200,
+        "content_type": "application/xml",
+        "body_excerpt": "<error code=\"cannotDisseminateFormat\">The value of the metadataPrefix argument is not supported by the repository.</error>"
+      }
+    }
+  ]
+}

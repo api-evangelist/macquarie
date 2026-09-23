@@ -1,10 +1,13 @@
+# authorship: written by API Evangelist from public evidence about the institution; corrected
+# 2026-08-30 to remove claims (IIIF, library rate limits) with no supporting surface.
+# x-method: generated
 specification: API Commons Plans
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
 provider: Macquarie University
 providerId: macquarie
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 reconciled: false
 tags:
 - Education
@@ -12,11 +15,13 @@ tags:
 - University
 - Plans
 description: >-
-  Macquarie University is a non-commercial higher-education institution; its APIs are not sold
-  as a commercial product. Public APIs (library, repository, course, and open-metadata
-  interfaces) are offered free of charge, typically for non-commercial use. Most
-  administrative and identity APIs are not openly self-service and require institutional
-  affiliation, credentials, or federation membership rather than a paid plan.
+  Macquarie University is a non-commercial higher-education institution and sells no API. Its one
+  institution-operated public surface, the Research Portal OAI-PMH endpoint, is free, keyless and
+  needs no registration; its Identify rights manifest permits metadata harvesting for discovery
+  and forbids harvesting full-text documents or reproduction for commercial purposes. Everything
+  else is either credential-gated behind institutional SSO (iLearn Moodle web services) or is a
+  vendor's commercial product tenanted under Macquarie's name, where the pricing is the vendor's
+  and not Macquarie's to publish (Elsevier Pure, Figshare, CourseLoop, Ex Libris).
 notes: >-
   No published per-seat or per-call commercial pricing. "Free / Open" reflects open
   public endpoints; "Affiliation / Credentialed" reflects access gated by institutional
@@ -27,7 +32,7 @@ plans:
 - id: macquarie-free-open
   name: Free / Open
   type: free
-  description: Public open APIs (metadata, library, repository, course data) offered at no charge, generally for non-commercial use.
+  description: The Research Portal OAI-PMH endpoint — free, keyless, no registration, metadata harvesting for discovery only, no commercial reproduction.
   entries:
   - label: Open API Access
     name: open_api_access
@@ -42,7 +47,7 @@ plans:
 - id: macquarie-affiliation
   name: Affiliation / Credentialed
   type: free
-  description: Administrative and identity APIs gated behind institutional SSO, client certificates, or federation membership rather than payment.
+  description: Surfaces gated behind institutional SSO or federation membership rather than payment — iLearn Moodle web services, and Elsevier Pure's api-key-gated /ws/api.
   entries:
   - label: Credentialed Access
     name: credentialed_access
