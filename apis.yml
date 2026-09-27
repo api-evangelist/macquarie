@@ -130,12 +130,13 @@ apis:
   - Library
   - Alma
   - Ex Libris
-  - Open-Source
+  - Open Source
   tags_raw:
   - Library
   - Alma
   - Ex Libris
   - Open Source
+  - Open-Source
   properties:
   - type: GitHubOrganization
     url: https://github.com/mqlibrary
