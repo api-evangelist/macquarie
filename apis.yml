@@ -110,6 +110,10 @@ apis:
   humanURL: https://ilearn.mq.edu.au/
   baseURL: https://ilearn.mq.edu.au/webservice/rest/server.php
   tags:
+  - LMS
+  - Moodle
+  - Credentialed
+  tags_raw:
   - Learning Management
   - Moodle
   - Credentialed
