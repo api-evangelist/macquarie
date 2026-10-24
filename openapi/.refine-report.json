@@ -1,9 +1,15 @@
 {
   "provider": "macquarie",
   "sources": [
+    "_original/macquarie-openapi.yml",
     "_original/macquarie-research-portal-oai-pmh-openapi.yml"
   ],
   "outputs": [
+    "macquarie-authority-control-tasks-api-openapi.yml",
+    "macquarie-lending-requests-api-openapi.yml",
+    "macquarie-printouts-api-openapi.yml",
+    "macquarie-requested-resources-api-openapi.yml",
+    "macquarie-test-api-openapi.yml",
     "macquarie-harvesting-api-openapi.yml"
   ],
   "archived": [],
@@ -11,9 +17,10 @@
   "warnings": [],
   "notes": [
     "1 archived document(s) dropped as subsets of other archived documents",
-    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "macquarie-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
     "macquarie-research-portal-oai-pmh-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "apis.yml register: written (+5 apis, 13 total)"
   ],
   "skipped": [
     "_original/macquarie-research-portal-oai-pmh.yaml: archived document superseded by a larger archived document",
