@@ -1,4 +1,4 @@
-# Macquarie University (macquarie)
+# Macquarie University
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,89 +64,132 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Macquarie University is a public research university in Sydney, Australia. Its programmable footprint is small, real, and almost entirely indirect. It operates no developer portal, no open-data platform and no central API programme. The one institution-operated, keyless, machine-readable API surface found is the **Macquarie University Research Portal OAI-PMH endpoint** at `research-management.mq.edu.au`, serving 114,062 publication records and a person registry over OAI-PMH 2.0 in five metadata formats with no authentication. Alongside it Macquarie runs a Shibboleth SAML identity provider registered in the Australian Access Federation, a self-hosted Moodle (iLearn) whose web services are credential-gated, and a public Library GitHub organisation whose code consumes Ex Libris Alma rather than exposing anything.
+Macquarie University is a public research university in Sydney, Australia. Its programmable footprint is small, real, and almost entirely indirect: it operates no developer portal, no open-data platform, and no central API programme. The one institution-operated, keyless, machine-readable API surface found is the Macquarie University Research Portal OAI-PMH endpoint at research-management.mq.edu.au, which serves 114,062 publication records and a person registry over OAI-PMH 2.0 with five metadata formats and no authentication. Beyond it, Macquarie operates a Shibboleth SAML identity provider registered in the Australian Access Federation, a self-hosted Moodle (iLearn) whose web services are credential-gated, and a public library GitHub organisation whose code consumes Ex Libris Alma rather than exposing anything. Everything else that looks like a Macquarie API is a vendor's contract running under Macquarie's name — Figshare for the research data repository, Elsevier Pure for the research portal, CourseLoop for the course handbook, Ex Libris Primo for library discovery. Those relationships are recorded here as tenant surfaces; the vendors' contracts are not.
 
-Everything else that looks like a Macquarie API is a vendor's contract running under Macquarie's name — Figshare, Elsevier Pure, CourseLoop, Ex Libris Primo. Those relationships are recorded here as tenant surfaces; the vendors' contracts are not.
+**Areas:** University · Higher Education · Education · Australia · Group of Eight Peer · Research Data · Research Repository · Metadata Harvesting · OAI-PMH · Identity Federation · Library · Course Catalog
 
-- APIs.json: https://raw.githubusercontent.com/api-evangelist/macquarie/refs/heads/main/apis.yml
-- Run with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=macquarie-api-evangelist&utm_content=repo
+## Macquarie University on APIs.io
 
-## Type
+Everything profiled for Macquarie University is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/macquarie/](https://apis.io/providers/macquarie/)** — or go straight to one of the APIs or properties below.
 
-- University / Public Research University / Index
+### APIs (8)
 
-## Tags
+- [Macquarie University Identity Provider (Shibboleth / SAML 2.0)](https://apis.io/apis/macquarie/idp-shibboleth/) — Macquarie operates its own Shibboleth identity provider at idp.mq.edu.au, publishing SAML 2.0 metadata anonymously at /idp/shibboleth and registered in the…
+- [Macquarie University iLearn (Moodle) Web Services](https://apis.io/apis/macquarie/ilearn-moodle-webservices/) — Macquarie self-hosts its learning management system as iLearn at ilearn.mq.edu.au and the Moodle web services REST endpoint answers publicly with a…
+- [Macquarie University Library Open-Source Tooling](https://apis.io/apis/macquarie/library-alma-tools/) — The Macquarie University Library publishes six public repositories on GitHub as the mqlibrary organisation — an Alma toolkit (now archived),…
+- [Macquarie University Research Portal (Elsevier Pure)](https://apis.io/apis/macquarie/research-portal-pure/) — Macquarie's research-information system is Elsevier Pure, tenanted on Macquarie hosts — researchers.mq.edu.au for the public portal and…
+- [Macquarie University Research Data Repository (Figshare)](https://apis.io/apis/macquarie/rdr-figshare/) — The Macquarie University Research Data Repository is Figshare for Institutions, tenanted at figshare.mq.edu.au with DOI prefix 10.25949 minted through…
+- [Macquarie University Course Handbook (CourseLoop)](https://apis.io/apis/macquarie/course-handbook-courseloop/) — The Macquarie course handbook runs on CourseLoop as tenant siteId mq-prod-pres, served at coursehandbook.mq.edu.au from a shared vendor API at…
+- [Macquarie University Library MultiSearch (Ex Libris Primo)](https://apis.io/apis/macquarie/library-multisearch-primo/) — Library discovery for Macquarie runs on Ex Libris Primo at multisearch.mq.edu.au. The holdings are Macquarie's; Primo and the Alma platform beneath it are…
+- [Macquarie University Harvesting API](https://apis.io/apis/macquarie/macquarie-harvesting-api/) — OAI-PMH 2.0 verbs for incremental metadata harvesting.
 
-- University
-- Higher Education
-- Education
-- Australia
-- Research Data
-- Research Repository
-- Metadata Harvesting
-- OAI-PMH
-- Identity Federation
-- Library
-- Course Catalog
+### Published properties
 
-## Surfaces
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Every surface carries an operator. `x-operator: institution` means Macquarie runs the thing; `tenant` means Macquarie's data on a vendor's platform, where the contract belongs to the vendor and is deliberately not held here.
+#### Vocabulary (1)
 
-**Institution-operated**
+The provider's domain terms, defined.
 
-- **Macquarie University Research Portal OAI-PMH** (`https://research-management.mq.edu.au/ws/oai`) — keyless OAI-PMH 2.0. All six verbs execute anonymously; formats `oai_dc`, `mods`, `xmetadiss`, `nl_didl`, `qdc`; `publications:all` reports `completeListSize` 114,062. Described in [openapi/macquarie-research-portal-oai-pmh-openapi.yml](openapi/macquarie-research-portal-oai-pmh-openapi.yml), **derived from live probes** on 2026-08-30 — Macquarie publishes no OpenAPI for it.
-- **Identity Provider (Shibboleth / SAML 2.0)** (`https://idp.mq.edu.au/idp/shibboleth`) — SAML metadata, registered in the Australian Access Federation as `urn:mace:federation.org.au:testfed:mq.edu.au`, asserting REFEDS R&S, the GEANT/REFEDS codes of conduct and SIRTFI.
-- **iLearn (Moodle) Web Services** (`https://ilearn.mq.edu.au/webservice/rest/server.php`) — reachable, structured `invalidtoken` error, every function credential-gated. No LTI platform endpoint answers.
-- **Library open-source tooling** (`https://github.com/mqlibrary`) — six public repos that *consume* Ex Libris Alma. None exposes an API.
+- [Macquarie University Research Data Repository Vocabulary](https://apis.io/vocabularies/macquarie/macquarie-vocabulary/)
 
-**Tenant (vendor contract, not Macquarie's)**
+#### Examples (1)
 
-- **Research Portal (Elsevier Pure)** — `researchers.mq.edu.au` / `research-management.mq.edu.au/ws/api`. The spec at `/ws/api/openapi.json` is Elsevier's: `info.title` "Pure API", `contact` `pure-support@elsevier.com`, version 5.33.3-3, 568 paths, relative `servers: /ws/api`.
-- **Research Data Repository (Figshare)** — `figshare.mq.edu.au`, DOI prefix 10.25949 via DataCite `ARDCX.MQU`. API is Figshare's generic v2, shared with 14+ other institutions in this catalog.
-- **Course Handbook (CourseLoop)** — `coursehandbook.mq.edu.au`, tenant `siteId: mq-prod-pres` on `api-ap-southeast-2.prod.courseloop.com`. Anonymous calls return 403.
-- **Library MultiSearch (Ex Libris Primo)** — `multisearch.mq.edu.au`.
+Example requests and responses.
 
-## Domain standards (education regime)
+- [Macquarie Oai Pmh Examples](https://apis.io/examples/macquarie/macquarie-oai-pmh-examples/)
 
-Confirmed with a fetched location: **oai-pmh**, **shibboleth**, **saml**, **datacite**. Checked and not found: **orcid**, **crossref**, **lti**, **scim**, **oneroster**, **ed-fi**, **caliper**, **qti**. See [conformance/macquarie-domain-standards.yml](conformance/macquarie-domain-standards.yml) for the evidence behind every one of them, including the negatives.
+#### Governance rules (1)
 
-## Artifacts
+Spectral rulesets for the provider's contracts.
 
-- [openapi/macquarie-research-portal-oai-pmh-openapi.yml](openapi/macquarie-research-portal-oai-pmh-openapi.yml) · [openapi/_original/](openapi/_original/)
-- [examples/macquarie-oai-pmh-examples.json](examples/macquarie-oai-pmh-examples.json) — verbatim captured responses
-- [authentication/macquarie-authentication.yml](authentication/macquarie-authentication.yml) · [errors/macquarie-oai-pmh-errors.yml](errors/macquarie-oai-pmh-errors.yml)
-- [conformance/macquarie-domain-standards.yml](conformance/macquarie-domain-standards.yml) · [lifecycle/macquarie-lifecycle.yml](lifecycle/macquarie-lifecycle.yml)
-- [vocabulary/macquarie-oai-pmh-vocabulary.yml](vocabulary/macquarie-oai-pmh-vocabulary.yml) · [rules/macquarie-oai-pmh-spectral-rules.yml](rules/macquarie-oai-pmh-spectral-rules.yml)
-- [plans/macquarie-plans-pricing.yml](plans/macquarie-plans-pricing.yml) · [rate-limits/macquarie-rate-limits.yml](rate-limits/macquarie-rate-limits.yml) · [finops/macquarie-finops.yml](finops/macquarie-finops.yml)
-- [security/macquarie-domain-security.yml](security/macquarie-domain-security.yml) · [review.yml](review.yml)
+- [Macquarie University — oai pmh rules](https://apis.io/rules/macquarie/macquarie-oai-pmh-spectral-rules/)
 
-## Timestamps
+#### Security (2)
 
-- Created: 2026-06-03
-- Modified: 2026-08-30
+Authentication, trust centre, and vulnerability disclosure.
 
-## Common Properties
+- [Macquarie Authentication](https://apis.io/security/macquarie/macquarie-authentication/)
+- [Macquarie Domain Security](https://apis.io/security/macquarie/macquarie-domain-security/)
 
-- Website: https://www.mq.edu.au/ (403 to non-browser clients — bot-filtered, not dead)
-- GitHub (library): https://github.com/mqlibrary
-- LinkedIn: https://www.linkedin.com/school/macquarie-university/
-- Identity federation: https://idp.mq.edu.au/idp/shibboleth · https://md.aaf.edu.au/aaf-metadata.xml
-- Research repository: https://researchers.mq.edu.au/ · https://figshare.mq.edu.au/
-- Course catalog: https://coursehandbook.mq.edu.au/
-- Library catalog: https://multisearch.mq.edu.au/
-- AI policy: https://policies.mq.edu.au/document/view.php?id=394
-- Privacy policy: https://policies.mq.edu.au/document/view.php?id=107
-- Terms (Acceptable Use of IT Resources): https://policies.mq.edu.au/document/view.php?id=234
+#### Plans and pricing (1)
 
-## Notes
+Published plans, tiers and prices.
 
-**Attribution correction, 2026-08-30.** This profile was rebuilt under the API Evangelist university pipeline. The 2026-06-03 profile had saved a copy of the **generic Figshare API v2 contract** under Macquarie's slug (`info.title` "Figshare API (Macquarie University Research Data Repository)", `info.contact` "Figshare Support", `servers: https://api.figshare.com/v2`); `refine-openapis` split it into ten per-tag documents, and eleven `apis[]` entries plus schemas, structures, examples, rules, a vocabulary, a JSON-LD context, scopes, an authentication profile, an agentic-access card, capability edges and twenty-one collection documents were derived from it. All 47 files and 11 entries were removed. `api.figshare.com` is claimed by fourteen other institutions in this catalog.
+- [Macquarie Plans Pricing](https://apis.io/plans/macquarie/macquarie-plans-pricing/)
 
-The Figshare **relationship** was not deleted. `figshare.mq.edu.au` holds Macquarie's data under Macquarie's DOI prefix and survives as a tenant surface. Only the contract and its derivatives went.
+#### Rate limits (1)
 
-No Macquarie-branded endpoint has been fabricated. Hosts that do not resolve: `api.mq.edu.au`, `developer.mq.edu.au`, `data.mq.edu.au`, `timetable.mq.edu.au`, `status.mq.edu.au`, `lib.mq.edu.au`. **Macquarie Bank** is a separate financial institution with its own developer portal (developer.macquariebank.io) and is intentionally excluded from this university profile.
+Published request limits.
 
-## Maintainers
+- [Macquarie Rate Limits](https://apis.io/rate-limits/macquarie/macquarie-rate-limits/)
 
-- Kin Lane — kin@apievangelist.com
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Macquarie Finops](https://apis.io/finops/macquarie/macquarie-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.mq.edu.au/)
+- [Documentation](https://libguides.mq.edu.au/research_data_repository)
+- [Support](https://policies.mq.edu.au/contact.php)
+- [Terms of service](https://policies.mq.edu.au/document/view.php?id=234)
+- [Privacy policy](https://policies.mq.edu.au/document/view.php?id=107)
+- [GitHub](https://github.com/mqlibrary)
+
+## API Evangelist rating
+
+**Kin Score 33.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 48.5 |
+| Contract governance | 26.5 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 26.2 |
+| Access clarity | 26.3 |
+
+**Agent readiness 20.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 24.5** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/macquarie/](https://apis.io/providers/macquarie/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Macquarie University: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/macquarie/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
